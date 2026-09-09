@@ -1627,7 +1627,7 @@
 
     
 window.ExpBuilderExecutionAddresses = Object.freeze(
-  {"version":2,"revision":"2026-09-09T20:20:42.253Z","nextBySource":{},"addressesByTarget":{"1788984782521":{"targetId":1788984782521,"targetKind":"trial","targetOwnerId":null,"enterLoopIds":[]}}}
+  {"version":2,"revision":"2026-09-09T20:28:07.166Z","nextBySource":{},"addressesByTarget":{"1788984782521":{"targetId":1788984782521,"targetKind":"trial","targetOwnerId":null,"enterLoopIds":[]}}}
 );
 
 const timeline = [];
@@ -1650,10 +1650,14 @@ response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y"
   const templates = ["<button id=\"ilva\" style=\"box-sizing: border-box; padding: 10px 20px; border-radius: 6px; background: #3b82f6; color: white; border: 0px solid #001c8d; font-weight: 600; cursor: pointer; background-color: #3136bf;\">Comenzar</button>"];
   return templates[choice_index] || templates[0];
 }, _button_font_size_runtime_vw: 1.5625 }],
+response_ends_trial: true,
+require_response: true,
 __canvasStyles: {"backgroundColor":"#ffffff","width":1024,"height":768,"fullScreen":true,"progressBar":false}}];
     const Bienvenida_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
+response_ends_trial: jsPsych.timelineVariable("response_ends_trial"),
+require_response: jsPsych.timelineVariable("require_response"),
 __canvasStyles: jsPsych.timelineVariable("__canvasStyles"),
 data: {
     rt: "rt",
