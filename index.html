@@ -15,6 +15,10 @@
         padding: 0;
         background-color: #f0f0f0;
       }
+
+      .jspsych-input-response {
+        margin-bottom: 2px !important;
+      }
     </style>
   <link href="https://unpkg.com/jspsych@8.2.2/css/jspsych.css" rel="stylesheet" type="text/css"><script src="https://unpkg.com/jspsych@8.2.2"></script><script src="https://unpkg.com/jspsych-expbuilder-plugin-dynamic@1.0.7/dist/index.iife.js"></script><link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@4.0.0/css/survey.css" data-dynamic-styles="true"><script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0" data-dynamic-plugins="true"></script><script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.1.0" data-dynamic-plugins="true"></script></head>
   <body>
@@ -1663,11 +1667,53 @@ const timeline = [];
     });
 
 
-const test_stimuli_Bienvenida = [{components: [{ type: "ImageComponent", coordinates: {"x":0,"y":50.376519861745564}, width: 54.94090649636948, height: 29.301816798063722, zIndex: 1, stimulus: "img/logos.svg", name: "ImageComponent_1" }, { type: "HtmlComponent", coordinates: {"x":0,"y":-25.2126573655719}, zIndex: 2, stimulus: "<p id=\"i8az\" style=\"box-sizing: border-box; text-align: center;\"></p><p id=\"irfw\" style=\"box-sizing: border-box; text-align: center; font-size: 30px;\"><strong style=\"box-sizing: border-box;\">¡Bienvenido!</strong></p><p id=\"isri\" style=\"box-sizing: border-box; text-align: center; font-size: 20px;\"></p><p id=\"i0h9\" style=\"box-sizing: border-box; text-align: center;\">Los responsables de este proyecto de investigación</p><p id=\"igcoe\" style=\"box-sizing: border-box; text-align: center;\"><strong style=\"box-sizing: border-box;\">¡AGRADECEN TU PARTICIPACIÓN!</strong></p><span id=\"ih2gv\" style=\"box-sizing: border-box; text-align: center;\">Dr. Julio Llamas Alonso (Universidad Autónoma del Estado de Hidalgo)</span><br id=\"igwzs\" style=\"box-sizing: border-box; text-align: center;\"><span id=\"izxth\" style=\"box-sizing: border-box; text-align: center;\">Dr. Vladimir Huerta Chávez (Universidad Autónoma del Estado de Hidalgo)</span><br id=\"it8k8\" style=\"box-sizing: border-box; text-align: center;\"><span id=\"i65jh\" style=\"box-sizing: border-box; text-align: center;\">Dr. Armando Q. Angulo Chavira (Universidad Nacional Autónoma de México)</span><p style=\"box-sizing: border-box;\"></p>", name: "HtmlComponent_1" }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-76.5625}, zIndex: 3, choices: ["Comenzar"], button_color: "#3b82f6", button_text_color: "#ffffff", button_font_size: 16, button_border_radius: 3, button_border_color: "#3b82f6", button_border_width: 6, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 2.083333333333333 }],
+const test_stimuli_Bienvenida = [{components: [{ type: "ImageComponent", coordinates: {"x":0,"y":50}, width: 24, height: 12.8, zIndex: 1, stimulus: "img/logos.svg", name: "ImageComponent_1" }, { type: "HtmlComponent", coordinates: {"x":0,"y":-25.2126573655719}, zIndex: 2, 
+stimulus: `
+  <div style="
+    box-sizing: border-box;
+    text-align: center;
+    font-family: sans-serif;
+  ">
+
+    <p style="
+      margin: 0 0 32px 0;
+      font-size: 48px;
+      font-weight: bold;
+    ">
+      ¡Bienvenido!
+    </p>
+
+    <p style="
+      margin: 0 0 28px 0;
+      font-size: 28px;
+    ">
+      Los responsables de este proyecto de investigación
+    </p>
+
+    <p style="
+      margin: 0 0 34px 0;
+      font-size: 30px;
+      font-weight: bold;
+    ">
+      ¡AGRADECEN TU PARTICIPACIÓN!
+    </p>
+
+    <div style="
+      font-size: 26px;
+      line-height: 1.45;
+    ">
+      Dr. Julio Llamas Alonso (Universidad Autónoma del Estado de Hidalgo)<br>
+      Dr. Vladimir Huerta Chávez (Universidad Autónoma del Estado de Hidalgo)<br>
+      Dr. Armando Q. Angulo Chavira (Universidad Nacional Autónoma de México)
+    </div>
+
+  </div>
+`,
+name: "HtmlComponent_1" }],
+response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-55}, zIndex: 3, choices: ["Comenzar"], button_color: "#3b82f6", button_text_color: "#ffffff", button_font_size: 20, button_border_radius: 3, button_border_color: "#3b82f6", button_border_width: 6, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 2.083333333333333 }],
 response_ends_trial: true,
 require_response: true,
-__canvasStyles: {"backgroundColor":"#ffffff","width":768,"height":725,"fullScreen":true,"progressBar":false}}];
+__canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
     const Bienvenida_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
@@ -2771,7 +2817,7 @@ data: {
         "type": "TextComponent",
         "coordinates": {
           "x": 0,
-          "y": 71.93016893792942
+          "y": 73
         },
         "zIndex": 1,
         "text": "AMIGO",
@@ -2798,7 +2844,7 @@ data: {
           "x": 0,
           "y": 13.133872641633134
         },
-        "width": 5.729166666666667,
+        "width": 7,
         "height": 1.5625,
         "zIndex": 20,
         "check_answers": false,
@@ -2847,7 +2893,7 @@ data: {
         "type": "TextComponent",
         "coordinates": {
           "x": 0,
-          "y": 71.93016893792942
+          "y": 73
         },
         "zIndex": 1,
         "text": "GENTE",
@@ -2874,7 +2920,7 @@ data: {
           "x": 0,
           "y": 13.133872641633134
         },
-        "width": 5.729166666666667,
+        "width": 7,
         "height": 1.5625,
         "zIndex": 20,
         "check_answers": false,
@@ -2923,7 +2969,7 @@ data: {
         "type": "TextComponent",
         "coordinates": {
           "x": 0,
-          "y": 71.93016893792942
+          "y": 73
         },
         "zIndex": 1,
         "text": "DIFERENCIA",
@@ -2950,7 +2996,7 @@ data: {
           "x": 0,
           "y": 13.133872641633134
         },
-        "width": 5.729166666666667,
+        "width": 7,
         "height": 1.5625,
         "zIndex": 20,
         "check_answers": false,
@@ -2999,7 +3045,7 @@ data: {
         "type": "TextComponent",
         "coordinates": {
           "x": 0,
-          "y": 71.93016893792942
+          "y": 73
         },
         "zIndex": 1,
         "text": "OSO",
@@ -3026,7 +3072,7 @@ data: {
           "x": 0,
           "y": 13.133872641633134
         },
-        "width": 5.729166666666667,
+        "width": 7,
         "height": 1.5625,
         "zIndex": 20,
         "check_answers": false,
@@ -3075,7 +3121,7 @@ data: {
         "type": "TextComponent",
         "coordinates": {
           "x": 0,
-          "y": 71.93016893792942
+          "y": 73
         },
         "zIndex": 1,
         "text": "MESA",
@@ -3102,7 +3148,7 @@ data: {
           "x": 0,
           "y": 13.133872641633134
         },
-        "width": 5.729166666666667,
+        "width": 7,
         "height": 1.5625,
         "zIndex": 20,
         "check_answers": false,
@@ -3790,7 +3836,7 @@ data: {
         "zIndex": 2,
         "text": "neumático de automóvil",
         "font_color": "#000000",
-        "font_size": 31,
+        "font_size": 41,
         "font_family": "sans-serif",
         "font_weight": "bold",
         "font_style": "normal",
@@ -3815,7 +3861,7 @@ data: {
         "zIndex": 3,
         "text": "p. ej., \"Atarle una cuerda y convertirlo en un columpio de llanta\", \"Usarlo como una silla para sentarse\", \"Utilizarlo como herramienta de ejercicio levantándolo repetidamente\", \"Meterse dentro de él y rodar cuesta abajo por una colina\", \"Plantar flores en su interior\"",
         "font_color": "#8c8c8c",
-        "font_size": 17,
+        "font_size": 23,
         "font_family": "sans-serif",
         "font_weight": "normal",
         "font_style": "normal",
@@ -3838,7 +3884,7 @@ data: {
         "zIndex": 4,
         "text": "Por favor EVITA utilizar cualquier de los anteriores usos del objeto proporcionado ya que son bastante comunes y poco originales",
         "font_color": "#000000",
-        "font_size": 19,
+        "font_size": 25,
         "font_family": "sans-serif",
         "font_weight": "normal",
         "font_style": "normal",
@@ -3871,15 +3917,15 @@ data: {
         "input_border_color": "#000000",
         "input_background_color": "#ffffff",
         "input_border_radius": 0,
-        "input_font_size": 107,
-        "_input_font_size_runtime_vw": 7.430555555555555
+        "input_font_size": 20,
+        "_input_font_size_runtime_vw": 1.3888888888888888
       }
     ],
     "trial_duration_creativity": 10000,
     "__canvasStyles_creativity": {
       "backgroundColor": "#ffffff",
-      "width": 1440,
-      "height": 763,
+      "width": 1920,
+      "height": 1080,
       "fullScreen": true,
       "progressBar": false
     }
@@ -3895,7 +3941,7 @@ data: {
         "zIndex": 2,
         "text": "periódico",
         "font_color": "#000000",
-        "font_size": 31,
+        "font_size": 41,
         "font_family": "sans-serif",
         "font_weight": "bold",
         "font_style": "normal",
@@ -3920,7 +3966,7 @@ data: {
         "zIndex": 3,
         "text": "p. ej., \"Envolver algo con él\", \"Limpiar algo con él\", \"Hacer papel maché\", \"Forrar o proteger algo\", \"Hacer ropa con él\"",
         "font_color": "#8c8c8c",
-        "font_size": 17,
+        "font_size": 23,
         "font_family": "sans-serif",
         "font_weight": "normal",
         "font_style": "normal",
@@ -3943,7 +3989,7 @@ data: {
         "zIndex": 4,
         "text": "Por favor EVITA utilizar cualquier de los anteriores usos del objeto proporcionado ya que son bastante comunes y poco originales",
         "font_color": "#000000",
-        "font_size": 19,
+        "font_size": 25,
         "font_family": "sans-serif",
         "font_weight": "normal",
         "font_style": "normal",
@@ -3976,22 +4022,23 @@ data: {
         "input_border_color": "#000000",
         "input_background_color": "#ffffff",
         "input_border_radius": 0,
-        "input_font_size": 107,
-        "_input_font_size_runtime_vw": 7.430555555555555
+        "input_font_size": 20,
+        "_input_font_size_runtime_vw": 1.3888888888888888
       }
     ],
     "trial_duration_creativity": 10000,
     "__canvasStyles_creativity": {
       "backgroundColor": "#ffffff",
-      "width": 1440,
-      "height": 763,
+      "width": 1920,
+      "height": 1080,
       "fullScreen": true,
       "progressBar": false
     }
   }
 ];
     
-    
+    let creativityLongText = "";
+    let creativityTextareaObserver = null;
     
     const creativity_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components_creativity"),
@@ -4081,12 +4128,92 @@ data: {
           }
         });
         // Clear the custom parameters after applying them
+      
         loop_loop_1789347025155_BranchCustomParameters = null;
+      }
+
+      // --- SOLO creatividad: convertir visualmente el input en textarea ---
+      creativityLongText = "";
+
+      if (creativityTextareaObserver) {
+        creativityTextareaObserver.disconnect();
+        creativityTextareaObserver = null;
+      }
+
+      const display = jsPsych.getDisplayElement();
+
+      function convertCreativityInput() {
+        const originalInput = display.querySelector('.jspsych-input-response');
+
+        // El DynamicPlugin todavía no lo ha creado
+        if (!originalInput) {
+          return false;
+        }
+
+        // Evitar crear más de un textarea
+        if (display.querySelector('.creativity-long-text')) {
+          return true;
+        }
+
+        const textarea = document.createElement('textarea');
+
+        textarea.className = 'creativity-long-text';
+
+        // Copiar el aspecto y tamaño del input original
+        textarea.style.cssText = originalInput.style.cssText;
+
+        // Convertirlo visualmente en caja de texto largo
+        textarea.style.boxSizing = 'border-box';
+        textarea.style.resize = 'none';
+        textarea.style.overflowY = 'auto';
+        textarea.style.overflowX = 'hidden';
+        textarea.style.whiteSpace = 'pre-wrap';
+        textarea.style.overflowWrap = 'break-word';
+        textarea.style.wordBreak = 'break-word';
+        textarea.style.lineHeight = '1.4';
+        textarea.style.padding = '12px';
+        textarea.style.textAlign = 'left';
+        textarea.style.fontSize = '20px';
+
+        // Insertarlo donde estaba el input
+        originalInput.parentNode.insertBefore(textarea, originalInput);
+
+        // No eliminamos el input porque el plugin lo sigue utilizando
+        originalInput.style.display = 'none';
+
+        textarea.addEventListener('input', function() {
+          creativityLongText = textarea.value;
+
+          // Mantener sincronizado el input interno del plugin
+          originalInput.value = textarea.value.replace(/\r?\n/g, ' ');
+        });
+
+        textarea.focus();
+
+        return true;
+      }
+
+      // Primero intentar inmediatamente
+      if (!convertCreativityInput()) {
+
+        // Si el plugin aún no creó el input, esperar hasta que aparezca
+        creativityTextareaObserver = new MutationObserver(function() {
+          if (convertCreativityInput()) {
+            creativityTextareaObserver.disconnect();
+            creativityTextareaObserver = null;
+          }
+        });
+
+        creativityTextareaObserver.observe(display, {
+          childList: true,
+          subtree: true
+        });
       }
       
     },
     
     on_finish: function(data) {
+      data.response = [creativityLongText];
       if (loop_loop_1789347025155_BranchingActive && loop_loop_1789347025155_TargetExecuted) {
         loop_loop_1789347025155_ShouldBranchOnFinish = false;
       } else if (typeof loop_loop_1789347025155_HasBranches !== 'undefined' && loop_loop_1789347025155_HasBranches) {
@@ -4309,7 +4436,11 @@ timeline.push(loop_1789347025155_procedure);
 const test_stimuli_instructions_creativity_2 = [{components: [{ type: "TextComponent", coordinates: {"x":0,"y":56.45515251303625}, zIndex: 1, text: "Por favor, escribe algunas oraciones creativas o un breve párrafo para las siguientes imágenes. \nNo existen reglas ni expectativas específicas; \nsimplemente escribe aquello que consideres que describe o se ajusta de la manera más creativa a cada imagen.", font_color: "#000000", font_size: 23, font_family: "sans-serif", font_weight: "normal", font_style: "normal", text_align: "center", line_height: 1.5, background_color: "transparent", padding: "0px", border_radius: 0, border_color: "transparent", border_width: 0, name: "TextComponent_1", _font_size_runtime_vw: 1.1979166666666667 }, { type: "ImageComponent", coordinates: {"x":0,"y":9.806635641827159}, width: 47.3802013010254, height: 15.804878195618214, zIndex: 4, stimulus: "img/image_creativity2.png", name: "ImageComponent_1" }],
 response_components: [{ type: "InputResponseComponent", coordinates: {"x":0,"y":-43.51599276708275}, width: 36.380208333333336, height: 9.921875, zIndex: 2, text: "%%", check_answers: false, allow_blanks: true, name: "InputResponseComponent_1", input_font_size: 127, input_background_color: "#ffffff", input_border_color: "#000000", input_border_width: 2, _input_font_size_runtime_vw: 6.614583333333333 }, { type: "ButtonResponseComponent", coordinates: {"x":0,"y":-68.77785077730302}, zIndex: 3, choices: ["Continuar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
 __canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
-    const instructions_creativity_2_timeline = {
+
+let creativity2LongText = "";
+let creativity2TextareaObserver = null;
+
+const instructions_creativity_2_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
 __canvasStyles: jsPsych.timelineVariable("__canvasStyles"),
@@ -4398,8 +4529,86 @@ data: {
             }
           }
         });
-        // Clear the custom parameters after applying them
+                // Clear the custom parameters after applying them
         window.branchCustomParameters = null;
+      }
+
+      // --- SOLO creatividad 2: convertir visualmente el input en textarea ---
+      creativity2LongText = "";
+
+      if (creativity2TextareaObserver) {
+        creativity2TextareaObserver.disconnect();
+        creativity2TextareaObserver = null;
+      }
+
+      const display = jsPsych.getDisplayElement();
+
+      function convertCreativity2Input() {
+        const originalInput = display.querySelector('.jspsych-input-response');
+
+        // El DynamicPlugin todavía no lo ha creado
+        if (!originalInput) {
+          return false;
+        }
+
+        // Evitar crear más de un textarea
+        if (display.querySelector('.creativity2-long-text')) {
+          return true;
+        }
+
+        const textarea = document.createElement('textarea');
+
+        textarea.className = 'creativity2-long-text';
+
+        // Copiar tamaño y posición del input original
+        textarea.style.cssText = originalInput.style.cssText;
+
+        // Comportamiento de caja de texto largo
+        textarea.style.boxSizing = 'border-box';
+        textarea.style.resize = 'none';
+        textarea.style.overflowY = 'auto';
+        textarea.style.overflowX = 'hidden';
+        textarea.style.whiteSpace = 'pre-wrap';
+        textarea.style.overflowWrap = 'break-word';
+        textarea.style.wordBreak = 'break-word';
+        textarea.style.lineHeight = '1.4';
+        textarea.style.padding = '12px';
+        textarea.style.textAlign = 'left';
+        textarea.style.fontSize = '20px';
+
+        // Insertar el textarea en el mismo lugar
+        originalInput.parentNode.insertBefore(textarea, originalInput);
+
+        // Mantener el input original para que ExpBuilder siga guardando la respuesta
+        originalInput.style.display = 'none';
+
+        textarea.addEventListener('input', function() {
+          creativity2LongText = textarea.value;
+
+          // Sincronizar con el input interno del plugin
+          originalInput.value = textarea.value.replace(/\r?\n/g, ' ');
+        });
+
+        textarea.focus();
+
+        return true;
+      }
+
+      // Intentar convertirlo inmediatamente
+      if (!convertCreativity2Input()) {
+
+        // Si el plugin todavía no creó el input, esperar hasta que aparezca
+        creativity2TextareaObserver = new MutationObserver(function() {
+          if (convertCreativity2Input()) {
+            creativity2TextareaObserver.disconnect();
+            creativity2TextareaObserver = null;
+          }
+        });
+
+        creativity2TextareaObserver.observe(display, {
+          childList: true,
+          subtree: true
+        });
       }
       
     },
