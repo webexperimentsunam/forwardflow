@@ -1,6 +1,9 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover"
+    >
     <link rel="icon" type="image/png+xml" href="/icon/fp black.png">
     <title>Experiment</title>
 
@@ -10,14 +13,43 @@
     
 
     <style>
+      html {
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+
       body {
         margin: 0;
         padding: 0;
         background-color: #f0f0f0;
       }
 
+      html,
+      body,
+      .jspsych-display-element,
+      #jspsych-dynamic-plugin-container,
+      #jspsych-dynamic-plugin-container canvas {
+        touch-action: pan-x pan-y pinch-zoom !important;
+      }
+
       .jspsych-input-response {
         margin-bottom: 2px !important;
+      }
+      /* =========================================================
+        ESCALA INICIAL LEGIBLE EN CELULAR
+        ========================================================= */
+
+      @media (max-width: 700px) and (orientation: portrait) {
+
+        #jspsych-dynamic-plugin-container {
+          transform:
+            translate(-50%, -50%)
+            scale(var(--expbuilder-mobile-scale, 1))
+            !important;
+
+          transform-origin: center center !important;
+        }
+
       }
     </style>
   <link href="https://unpkg.com/jspsych@8.2.2/css/jspsych.css" rel="stylesheet" type="text/css"><script src="https://unpkg.com/jspsych@8.2.2"></script><script src="https://unpkg.com/jspsych-expbuilder-plugin-dynamic@1.0.7/dist/index.iife.js"></script><link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@4.0.0/css/survey.css" data-dynamic-styles="true"><script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0" data-dynamic-plugins="true"></script><script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.1.0" data-dynamic-plugins="true"></script></head>
@@ -1654,18 +1686,293 @@ window.ExpBuilderExecutionAddresses = Object.freeze(
 
 const timeline = [];
 
-    const globalPreload = {
-      type: jsPsychPreload,
-      files: ["img/image_creativity2.png","img/logos.svg"]
-    };
-    timeline.push(globalPreload);
 
-    timeline.push({
-      type: jsPsychFullscreen,
-      fullscreen_mode: true,
-      conditional_function: function() { return !document.fullscreenElement; }
+  // ============================================================
+  // FIX MÓVIL PARA INPUTS DE FORWARD FLOW Y CREATIVIDAD
+  // ============================================================
+
+  function normalizeExpBuilderInputGeometry() {
+
+ 
+    const container =
+      document.getElementById('jspsych-dynamic-plugin-container');
+
+    if (!container) {
+      return;
+    }
+
+    // Tamaño REAL del layer del trial actual
+    const designWidth = parseFloat(container.style.width);
+    const designHeight = parseFloat(container.style.height);
+
+    if (
+      !Number.isFinite(designWidth) ||
+      !Number.isFinite(designHeight) ||
+      designWidth <= 0 ||
+      designHeight <= 0
+    ) {
+      return;
+    }
+
+
+    // ----------------------------------------------------------
+    // Encontrar los inputs creados por ExpBuilder
+    // ----------------------------------------------------------
+
+    const originalInputs = [
+      ...container.querySelectorAll('.jspsych-input-response')
+    ];
+
+    const hasCreativityTextarea =
+      container.querySelector(
+        '.creativity-long-text, .creativity2-long-text'
+      );
+
+    // Forward Flow tiene muchos inputs.
+    // Creatividad tiene nuestro textarea especial.
+    const isForwardFlow = originalInputs.length >= 10;
+    const isCreativity = !!hasCreativityTextarea;
+
+    // No afectar fecha de nacimiento ni otros inputs del experimento
+    if (!isForwardFlow && !isCreativity) {
+      return;
+    }
+
+
+    // ----------------------------------------------------------
+    // 1. CORREGIR POSICIÓN DEL CONTENEDOR DE INPUTS
+    // ----------------------------------------------------------
+
+    const groups = [];
+
+    originalInputs.forEach(function(input) {
+
+      const parent = input.parentElement;
+
+      if (parent && !groups.includes(parent)) {
+        groups.push(parent);
+      }
+
     });
 
+
+    groups.forEach(function(group) {
+
+      // ExpBuilder genera algo como:
+      //
+      // left: calc(50% + 0vw)
+      // top:  calc(50% - 6.56vh)
+
+      const leftValue = group.style.left;
+      const topValue = group.style.top;
+
+
+      // ========================================================
+      // LEFT: aceptar tanto "+" como "-"
+      // ========================================================
+
+      const leftMatch = leftValue.match(
+        /calc\(50%\s*([+-])\s*(\d+(?:\.\d+)?)vw\)/i
+      );
+
+      if (leftMatch) {
+
+        const direction =
+          leftMatch[1] === '+' ? 1 : -1;
+
+        const offsetVW =
+          parseFloat(leftMatch[2]);
+
+        const leftPx =
+          (designWidth / 2) +
+          direction *
+          (offsetVW / 100) *
+          designWidth;
+
+        group.style.left = leftPx + 'px';
+      }
+
+
+      // ========================================================
+      // TOP: aceptar tanto "+" como "-"
+      // IMPORTANTE para coordenadas Y negativas
+      // ========================================================
+
+      const topMatch = topValue.match(
+        /calc\(50%\s*([+-])\s*(\d+(?:\.\d+)?)vh\)/i
+      );
+
+      if (topMatch) {
+
+        const direction =
+          topMatch[1] === '+' ? 1 : -1;
+
+        const offsetVH =
+          parseFloat(topMatch[2]);
+
+        const topPx =
+          (designHeight / 2) +
+          direction *
+          (offsetVH / 100) *
+          designHeight;
+
+        group.style.top = topPx + 'px';
+      }
+
+    });
+
+
+    // ----------------------------------------------------------
+    // 2. CORREGIR TAMAÑO DE INPUTS
+    // ----------------------------------------------------------
+
+    const fields = container.querySelectorAll(
+      '.jspsych-input-response,' +
+      '.creativity-long-text,' +
+      '.creativity2-long-text'
+    );
+
+
+    fields.forEach(function(element) {
+
+      function vwToDesignPixels(property) {
+
+        const value = element.style[property];
+
+        // Sólo convertir valores que todavía estén en vw
+        if (!value || !value.trim().endsWith('vw')) {
+          return;
+        }
+
+        const number = parseFloat(value);
+
+        if (!Number.isFinite(number)) {
+          return;
+        }
+
+        element.style[property] =
+          ((number / 100) * designWidth) + 'px';
+      }
+
+
+      // Lo mismo que hacía el primer fix que sí funcionaba
+      vwToDesignPixels('width');
+      vwToDesignPixels('height');
+      vwToDesignPixels('fontSize');
+
+    });
+
+  }
+
+  // ============================================================
+  // ESCALA INICIAL MÁS LEGIBLE EN CELULAR
+  // ============================================================
+
+  function applyMobileReadableScale() {
+
+    const MOBILE_VISIBLE_DESIGN_WIDTH = 2000;
+
+    const isMobilePortrait =
+      (
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia('(pointer: coarse)').matches
+      ) &&
+      window.innerWidth <= 700 &&
+      window.innerHeight > window.innerWidth;
+
+
+    // PC o teléfono horizontal:
+    // quitar nuestra escala personalizada
+    if (!isMobilePortrait) {
+
+      document.documentElement.style.removeProperty(
+        '--expbuilder-mobile-scale'
+      );
+
+      return;
+    }
+
+
+    // Ejemplo:
+    // 390px / 900px = 0.4333
+    const readableScale =
+      window.innerWidth / MOBILE_VISIBLE_DESIGN_WIDTH;
+
+    console.log(
+      'MOBILE_VISIBLE_DESIGN_WIDTH =',
+      MOBILE_VISIBLE_DESIGN_WIDTH,
+      'window.innerWidth =',
+      window.innerWidth,
+      'readableScale =',
+      readableScale
+    );
+
+
+    document.documentElement.style.setProperty(
+      '--expbuilder-mobile-scale',
+      String(readableScale)
+    );
+  }
+
+
+  // ============================================================
+  // ESPERAR A QUE DYNAMICPLUGIN CREE LOS INPUTS
+  // ============================================================
+
+  let expbuilderInputFixPending = false;
+
+  const expbuilderInputObserver =
+    new MutationObserver(function() {
+
+      if (expbuilderInputFixPending) {
+        return;
+      }
+
+      expbuilderInputFixPending = true;
+
+      requestAnimationFrame(function() {
+
+        expbuilderInputFixPending = false;
+
+        normalizeExpBuilderInputGeometry();
+
+      });
+
+    });
+
+
+  expbuilderInputObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+
+  // Si gira el teléfono, volver a comprobar
+  window.addEventListener('resize', function() {
+
+    requestAnimationFrame(function() {
+
+      normalizeExpBuilderInputGeometry();
+
+      applyMobileReadableScale();
+
+    });
+
+  });
+
+
+  // ============================================================
+  // AQUÍ CONTINÚA EL CÓDIGO ORIGINAL
+  // ============================================================
+
+  const globalPreload = {
+    type: jsPsychPreload,
+    files: ["img/image_creativity2.png","img/logos.svg"]
+  };
+
+  timeline.push(globalPreload);
+
+    
 
 const test_stimuli_Bienvenida = [{components: [{ type: "ImageComponent", coordinates: {"x":0,"y":50}, width: 24, height: 12.8, zIndex: 1, stimulus: "img/logos.svg", name: "ImageComponent_1" }, { type: "HtmlComponent", coordinates: {"x":0,"y":-25.2126573655719}, zIndex: 2, 
 stimulus: `
@@ -4674,7 +4981,7 @@ data: {
 
 
 const test_stimuli_intro_lextale = [{components: [{ type: "HtmlComponent", coordinates: {"x":0,"y":0}, zIndex: 1, stimulus: "<p id=\"ilvg\" style=\"box-sizing: border-box; text-align: center;\"></p><h2 style=\"box-sizing: border-box;\">Tarea de reconocimeinto de palabras</h2><p style=\"box-sizing: border-box;\"></p><p id=\"ilu9\" style=\"box-sizing: border-box; margin-top: 20px;\">Cuando estés listo, haz clic en <strong style=\"box-sizing: border-box;\">\"Comenzar\"</strong> para continuar.</p><p style=\"box-sizing: border-box;\"></p>", name: "HtmlComponent_1" }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-15.475016424893195}, zIndex: 2, choices: ["Button"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
+response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-15.475016424893195}, zIndex: 2, choices: ["Continuar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
 __canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
     const intro_lextale_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
@@ -4832,7 +5139,7 @@ data: {
 
 
 const test_stimuli_instructions_lextale = [{components: [{ type: "HtmlComponent", coordinates: {"x":0,"y":32.38290474098019}, zIndex: 1, stimulus: "<p id=\"iixg\" style=\"box-sizing: border-box;\"></p><p id=\"ij9g\" style=\"box-sizing: border-box;\"><strong id=\"i93u\" style=\"box-sizing: border-box;\">Instrucciones</strong></p><p id=\"ibt6\" style=\"box-sizing: border-box;\">Este test consta de varias pruebas. En cada una de ellas verás una <strong id=\"iz9j\" style=\"box-sizing: border-box;\">secuencia de letras en español</strong>.</p><p id=\"ivi6q\" style=\"box-sizing: border-box;\">Tu tarea es decidir si se trata de una <strong id=\"ifrmj\" style=\"box-sizing: border-box;\">palabra real del español que conoces</strong>. <br style=\"box-sizing: border-box;\">Si piensas que <strong id=\"i00t7\" style=\"box-sizing: border-box;\">sí es una palabra del español</strong> que conoces, haz clic en el botón <strong id=\"i231y\" style=\"box-sizing: border-box;\">“sí”</strong>. <br style=\"box-sizing: border-box;\">Si piensas que <strong id=\"ir51s\" style=\"box-sizing: border-box;\">no es una palabra del español</strong> o no estás seguro, haz clic en <strong id=\"ipy7k\" style=\"box-sizing: border-box;\">“no”</strong>.</p><p id=\"irh7i\" style=\"box-sizing: border-box;\">Si estás seguro de que la palabra existe, aunque no sepas exactamente lo que significa, puedes responder <strong id=\"iiv8h\" style=\"box-sizing: border-box;\">“sí”</strong>. <br style=\"box-sizing: border-box;\">Pero si no estás seguro de que sea una palabra existente, debes responder <strong id=\"isa27\" style=\"box-sizing: border-box;\">“no”</strong>.</p><p id=\"i6qpc\" style=\"box-sizing: border-box;\"><strong id=\"icfdp\" style=\"box-sizing: border-box;\">Importante:</strong> los errores se penalizan. No tiene sentido marcar “sí” para muchas palabras que no conoces solo para intentar subir la puntuación.</p><p id=\"ij79i\" style=\"box-sizing: border-box;\"></p>", name: "HtmlComponent_1" }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-13.755570155460603}, zIndex: 2, choices: ["Button"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
+response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-13.755570155460603}, zIndex: 2, choices: ["Continuar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
 __canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
     const instructions_lextale_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
