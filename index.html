@@ -33,7 +33,7 @@
       }
 
       .jspsych-input-response {
-        margin-bottom: 2px !important;
+        margin-bottom: 6px !important;
       }
       /* =========================================================
         ESCALA INICIAL LEGIBLE EN CELULAR
@@ -44,12 +44,459 @@
         #jspsych-dynamic-plugin-container {
           transform:
             translate(-50%, -50%)
-            scale(var(--expbuilder-mobile-scale, 1))
+            scale(var(--expbuilder-mobile-scale))
             !important;
 
           transform-origin: center center !important;
         }
 
+      }
+      /* =========================================================
+        SURVEY SOCIODEMOGRÁFICO
+        Zona útil: 900 × 1080
+        ========================================================= */
+
+
+      /* ---------------------------------------------------------
+        CONTENEDOR EXTERIOR CREADO POR EXPBUILDER
+        --------------------------------------------------------- */
+
+      #jspsych-survey-surveyjs-container {
+        width: 900px !important;
+        height: 1080px !important;
+
+        max-width: 900px !important;
+        max-height: 1080px !important;
+
+        min-width: 900px !important;
+        min-height: 1080px !important;
+
+        box-sizing: border-box !important;
+
+        background: #ffffff !important;
+
+        /*
+          IMPORTANTE:
+          quitamos el scroll del contenedor exterior.
+          El scroll, si alguna vez hace falta, ocurrirá dentro
+          del survey y ocupará toda la altura disponible.
+        */
+        overflow: hidden !important;
+      }
+
+
+      /* ---------------------------------------------------------
+        CONTENEDOR INTERIOR CREADO POR SurveyComponent
+        --------------------------------------------------------- */
+
+      #jspsych-survey-surveyjs-container
+      .jspsych-survey-container {
+
+        width: 100% !important;
+        height: 100% !important;
+
+        min-width: 0 !important;
+        max-width: none !important;
+
+        box-sizing: border-box !important;
+
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+
+        background: #ffffff !important;
+
+        font-family: sans-serif !important;
+      }
+
+
+      /* ---------------------------------------------------------
+        RAÍZ DE SURVEYJS
+        --------------------------------------------------------- */
+
+      #jspsych-survey-surveyjs-container
+      .sd-root-modern,
+
+      #jspsych-survey-surveyjs-container
+      .sv-root-modern,
+
+      #jspsych-survey-surveyjs-container
+      .sd-root,
+
+      #jspsych-survey-surveyjs-container
+      .sv_main {
+
+        width: 100% !important;
+        min-width: 100% !important;
+
+        min-height: 100% !important;
+
+        box-sizing: border-box !important;
+
+        margin: 0 !important;
+
+        /*
+          Un margen interior razonable respecto a la guía roja.
+        */
+        padding: 55px 60px 70px 60px !important;
+
+        background: #ffffff !important;
+        color: #000000 !important;
+
+        font-family: sans-serif !important;
+
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+
+      /* ---------------------------------------------------------
+        ELIMINAR FONDOS GRISES DE SURVEYJS
+        --------------------------------------------------------- */
+
+      #jspsych-survey-surveyjs-container
+      .sd-container-modern,
+
+      #jspsych-survey-surveyjs-container
+      .sv-container-modern,
+
+      #jspsych-survey-surveyjs-container
+      .sd-body,
+
+      #jspsych-survey-surveyjs-container
+      .sv_body,
+
+      #jspsych-survey-surveyjs-container
+      .sd-page,
+
+      #jspsych-survey-surveyjs-container
+      .sv_page,
+
+      #jspsych-survey-surveyjs-container
+      .sd-row {
+
+        background: #ffffff !important;
+
+        border: none !important;
+        box-shadow: none !important;
+      }
+
+
+      /* ---------------------------------------------------------
+        TARJETAS DE LAS PREGUNTAS
+        --------------------------------------------------------- */
+
+      #jspsych-survey-surveyjs-container
+      .sd-question,
+
+      #jspsych-survey-surveyjs-container
+      .sv_q {
+
+        background: #ffffff !important;
+
+        border: 1px solid #dddddd !important;
+        border-radius: 6px !important;
+
+        box-shadow: none !important;
+
+        padding: 28px 30px !important;
+
+        margin: 0 0 20px 0 !important;
+
+        font-family: sans-serif !important;
+      }
+
+
+      /* ---------------------------------------------------------
+        TEXTO DE LAS PREGUNTAS
+        --------------------------------------------------------- */
+
+      #jspsych-survey-surveyjs-container
+      .sd-title,
+
+      #jspsych-survey-surveyjs-container
+      .sd-question__title,
+
+      #jspsych-survey-surveyjs-container
+      .sd-element__title,
+
+      #jspsych-survey-surveyjs-container
+      .sd-question__title .sv-string-viewer,
+
+      #jspsych-survey-surveyjs-container
+      .sd-element__title .sv-string-viewer,
+
+      #jspsych-survey-surveyjs-container
+      .sd-title .sv-string-viewer {
+
+        font-family: sans-serif !important;
+
+        font-size: 30px !important;
+        font-weight: 600 !important;
+
+        line-height: 1.35 !important;
+
+        color: #000000 !important;
+      }
+
+
+      /* ---------------------------------------------------------
+        TEXTO DE LAS OPCIONES
+        --------------------------------------------------------- */
+
+      #jspsych-survey-surveyjs-container
+      .sd-selectbase__label,
+
+      #jspsych-survey-surveyjs-container
+      .sd-item__control-label,
+
+      #jspsych-survey-surveyjs-container
+      .sv-label,
+
+      #jspsych-survey-surveyjs-container
+      .sv_q_radiogroup_label {
+
+        font-family: sans-serif !important;
+
+        font-size: 28px !important;
+        font-weight: normal !important;
+
+        line-height: 1.4 !important;
+
+        color: #000000 !important;
+      }
+
+
+      /* Separación entre Sí / No / etc. */
+
+      #jspsych-survey-surveyjs-container
+      .sd-selectbase__item,
+
+      #jspsych-survey-surveyjs-container
+      .sd-item,
+
+      #jspsych-survey-surveyjs-container
+      .sv-item {
+
+        margin-bottom: 12px !important;
+
+        font-family: sans-serif !important;
+      }
+
+      /* ---------------------------------------------------------
+        RADIOBUTTONS MÁS VISIBLES
+        --------------------------------------------------------- */
+
+      #jspsych-survey-surveyjs-container
+      .sd-radio__decorator {
+
+        width: 26px !important;
+        height: 26px !important;
+
+        min-width: 26px !important;
+        min-height: 26px !important;
+
+        box-sizing: border-box !important;
+
+        border: 2px solid #555555 !important;
+        border-radius: 50% !important;
+
+        background: #ffffff !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+
+      /* Cuando se selecciona una respuesta */
+
+      #jspsych-survey-surveyjs-container
+      .sd-radio--checked
+      .sd-radio__decorator {
+
+        border-color: #000000 !important;
+      }
+
+
+      /* Punto interior de la opción seleccionada */
+
+      #jspsych-survey-surveyjs-container
+      .sd-radio--checked
+      .sd-radio__decorator::after {
+
+        width: 12px !important;
+        height: 12px !important;
+
+        border-radius: 50% !important;
+
+        background: #000000 !important;
+      }
+
+
+      /* Al pasar el mouse en computadora */
+
+      #jspsych-survey-surveyjs-container
+      .sd-radio:hover
+      .sd-radio__decorator {
+
+        border-color: #000000 !important;
+      }
+
+
+      /* ---------------------------------------------------------
+        BOTÓN: MISMO ESTILO QUE LOS DEMÁS
+        --------------------------------------------------------- */
+
+      #jspsych-survey-surveyjs-container
+      .sd-btn,
+
+      #jspsych-survey-surveyjs-container
+      .sd-navigation__complete-btn,
+
+      #jspsych-survey-surveyjs-container
+      .sv-btn {
+
+        font-family: sans-serif !important;
+
+        font-size: 28px !important;
+        font-weight: normal !important;
+
+        background: #ffffff !important;
+        color: #000000 !important;
+
+        border: 1px solid #000000 !important;
+        border-radius: 3px !important;
+
+        box-shadow: none !important;
+
+        padding: 10px 22px !important;
+
+        min-width: auto !important;
+      }
+
+
+      /* Centrar el botón */
+
+      #jspsych-survey-surveyjs-container
+      .sd-navigation,
+
+      #jspsych-survey-surveyjs-container
+      .sv_nav {
+
+        display: flex !important;
+        justify-content: center !important;
+
+        margin-top: 26px !important;
+        padding-bottom: 20px !important;
+      }
+
+      /* ---------------------------------------------------------
+        SCROLLBAR MÁS VISIBLE
+        --------------------------------------------------------- */
+
+      #jspsych-survey-surveyjs-container
+      .jspsych-survey-container {
+
+        scrollbar-width: auto;
+        scrollbar-color: #6b6b6b #eeeeee;
+
+        scrollbar-gutter: stable;
+      }
+
+
+      /* Chrome / Edge / Android */
+
+      #jspsych-survey-surveyjs-container
+      .jspsych-survey-container::-webkit-scrollbar {
+
+        width: 18px;
+      }
+
+
+      #jspsych-survey-surveyjs-container
+      .jspsych-survey-container::-webkit-scrollbar-track {
+
+        background: #eeeeee;
+
+        border-left: 1px solid #cccccc;
+
+        border-radius: 10px;
+      }
+
+
+      #jspsych-survey-surveyjs-container
+      .jspsych-survey-container::-webkit-scrollbar-thumb {
+
+        background: #707070;
+
+        border: 3px solid #eeeeee;
+
+        border-radius: 10px;
+      }
+
+
+      #jspsych-survey-surveyjs-container
+      .jspsych-survey-container::-webkit-scrollbar-thumb:hover {
+
+        background: #444444;
+      }
+
+      /* ---------------------------------------------------------
+        INDICADOR DE MÁS PREGUNTAS
+        --------------------------------------------------------- */
+
+      .survey-scroll-hint {
+
+        position: absolute;
+
+        right: 38px;
+        bottom: 28px;
+
+        z-index: 99999;
+
+        padding: 9px 16px;
+
+        background: rgba(255, 255, 255, 0.96);
+
+        color: #333333;
+
+        border: 2px solid #777777;
+        border-radius: 6px;
+
+        font-family: sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+
+        line-height: 1.2;
+
+        pointer-events: none;
+
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      }
+
+      /* =========================================================
+        GUÍA TEMPORAL DE ZONA SEGURA
+        BORRAR AL FINAL
+        ========================================================= */
+
+      #jspsych-dynamic-plugin-container::after {
+        content: "";
+        position: absolute;
+
+        width: 900px;
+        height: 1080px;
+
+        left: 50%;
+        top: 50%;
+
+        transform: translate(-50%, -50%);
+
+        border: 4px dashed rgba(255, 0, 0, 0.65);
+
+        box-sizing: border-box;
+        pointer-events: none;
+
+        z-index: 99999;
       }
     </style>
   <link href="https://unpkg.com/jspsych@8.2.2/css/jspsych.css" rel="stylesheet" type="text/css"><script src="https://unpkg.com/jspsych@8.2.2"></script><script src="https://unpkg.com/jspsych-expbuilder-plugin-dynamic@1.0.7/dist/index.iife.js"></script><link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@4.0.0/css/survey.css" data-dynamic-styles="true"><script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0" data-dynamic-plugins="true"></script><script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.1.0" data-dynamic-plugins="true"></script></head>
@@ -1064,8 +1511,25 @@ const cWe = observeJumpReload;
         <circle cx="32" cy="32" r="30" fill="#22c55e"/>
         <polyline points="18,33 28,43 46,22" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      <p style="margin:0;color:#111;font-size:18px;font-weight:600">Experiment complete. Thank you!</p>
-      <p style="margin:0;color:#555;font-size:14px">You can now close this window.</p>
+      <p style="
+        margin:0;
+        color:#111;
+        font-size:28px;
+        font-weight:600;
+        text-align:center;
+      ">
+        ¡Actividad completada! Gracias por participar.
+      </p>
+
+      <p style="
+        margin:0;
+        color:#555;
+        font-size:22px;
+        text-align:center;
+      ">
+        Tus respuestas se guardaron correctamente.<br>
+        Ya puedes cerrar esta pestaña.
+      </p>
     `;
     document.body.appendChild(overlay);
   }
@@ -1733,8 +2197,13 @@ const timeline = [];
     const isForwardFlow = originalInputs.length >= 10;
     const isCreativity = !!hasCreativityTextarea;
 
-    // No afectar fecha de nacimiento ni otros inputs del experimento
-    if (!isForwardFlow && !isCreativity) {
+    // Detectar específicamente el input de fecha de nacimiento
+    const isBirthdate = originalInputs.some(function(input) {
+      return input.type === 'date';
+    });
+
+    // Sólo corregir las tareas que sabemos que lo necesitan
+    if (!isForwardFlow && !isCreativity && !isBirthdate) {
       return;
     }
 
@@ -1864,13 +2333,106 @@ const timeline = [];
 
   }
 
+  
+  // ============================================================
+  // INDICADOR DE SCROLL PARA EL SURVEY
+  // ============================================================
+
+  function updateSurveyScrollHint() {
+
+    const outer =
+      document.getElementById(
+        'jspsych-survey-surveyjs-container'
+      );
+
+    if (!outer) {
+      return;
+    }
+
+
+    const scroller =
+      outer.querySelector(
+        '.jspsych-survey-container'
+      );
+
+    if (!scroller) {
+      return;
+    }
+
+
+    // Crear el indicador una sola vez
+    let hint =
+      outer.querySelector(
+        '.survey-scroll-hint'
+      );
+
+
+    if (!hint) {
+
+      hint =
+        document.createElement('div');
+
+      hint.className =
+        'survey-scroll-hint';
+
+      hint.innerHTML =
+        'Más preguntas &nbsp; ↓';
+
+      outer.appendChild(hint);
+    }
+
+
+    function refreshHint() {
+
+      const tolerance = 10;
+
+      const canScroll =
+        scroller.scrollHeight >
+        scroller.clientHeight + tolerance;
+
+      const hasMoreBelow =
+        scroller.scrollTop +
+        scroller.clientHeight <
+        scroller.scrollHeight - tolerance;
+
+
+      // Mostrar solamente si:
+      // 1. realmente hay scroll
+      // 2. todavía hay contenido debajo
+
+      hint.style.display =
+        canScroll && hasMoreBelow
+          ? 'block'
+          : 'none';
+    }
+
+
+    refreshHint();
+
+
+    // Evitar agregar múltiples listeners
+    if (
+      scroller.dataset.surveyScrollHintBound !== '1'
+    ) {
+
+      scroller.dataset.surveyScrollHintBound = '1';
+
+      scroller.addEventListener(
+        'scroll',
+        refreshHint,
+        { passive: true }
+      );
+    }
+  }
+  
+  
   // ============================================================
   // ESCALA INICIAL MÁS LEGIBLE EN CELULAR
   // ============================================================
 
   function applyMobileReadableScale() {
 
-    const MOBILE_VISIBLE_DESIGN_WIDTH = 2000;
+    const MOBILE_VISIBLE_DESIGN_WIDTH = 900;
 
     const isMobilePortrait =
       (
@@ -1914,7 +2476,7 @@ const timeline = [];
     );
   }
 
-
+  applyMobileReadableScale();
   // ============================================================
   // ESPERAR A QUE DYNAMICPLUGIN CREE LOS INPUTS
   // ============================================================
@@ -1935,6 +2497,8 @@ const timeline = [];
         expbuilderInputFixPending = false;
 
         normalizeExpBuilderInputGeometry();
+        
+        updateSurveyScrollHint();
 
       });
 
@@ -1955,6 +2519,8 @@ const timeline = [];
       normalizeExpBuilderInputGeometry();
 
       applyMobileReadableScale();
+
+      updateSurveyScrollHint();
 
     });
 
@@ -2178,11 +2744,135 @@ data: {
   
 
 
-const test_stimuli_Consentimiento = [{components: [{ type: "HtmlComponent", coordinates: {"x":0,"y":14.328718911938122}, zIndex: 1, stimulus: "<p id=\"ig6o\" style=\"box-sizing: border-box;\"></p><p id=\"i8ml\" style=\"box-sizing: border-box; text-align: center; font-size: 20px;\"><strong style=\"box-sizing: border-box;\">CONSENTIMIENTO INFORMADO</strong></p><div id=\"iw0q\" style=\"box-sizing: border-box; max-width: 720px; margin: 0px auto; line-height: 1.5;\"><p style=\"box-sizing: border-box;\">Por medio del presente acepto participar en el proyecto de investigación <strong style=\"box-sizing: border-box;\">\"Forward Flow en población mexicana\"</strong>. Este estudio tiene como objetivo comprender cómo diferentes personas procesan información léxica de manera espontánea.</p><p style=\"box-sizing: border-box;\">Mi participación será completamente en línea, tendrá una duración aproximada de <strong style=\"box-sizing: border-box;\">10 minutos</strong> e incluirá un cuestionario sociodemográfico, una prueba de reconocimiento de palabras, una prueba de creatividad y una prueba de producción de palabras.</p><p style=\"box-sizing: border-box;\">Soy consciente de que:</p><ul style=\"box-sizing: border-box;\"><li style=\"box-sizing: border-box;\">Mi participación es totalmente voluntaria y puedo detenerla en cualquier momento sin consecuencias.</li><li style=\"box-sizing: border-box;\">El estudio no implica riesgos físicos ni psicológicos relevantes.</li><li style=\"box-sizing: border-box;\">Los datos que proporcione serán tratados de manera confidencial y utilizados únicamente con fines de investigación.</li></ul><p style=\"box-sizing: border-box;\">He leído esta información y manifiesto mi decisión libre, consciente y voluntaria de participar.</p></div><p style=\"box-sizing: border-box;\"></p>", name: "HtmlComponent_1" }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":-11.775074564540683,"y":-53.858389907965446}, zIndex: 2, choices: ["Acepto"], button_color: "#22c55e", button_text_color: "#ffffff", button_font_size: 20, button_border_radius: 3, button_border_color: "#22c55e", button_border_width: 1, button_padding: "6px 25px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }, { type: "ButtonResponseComponent", coordinates: {"x":17.42065825986837,"y":-53.858389907965446}, zIndex: 3, choices: ["No acepto"], button_color: "#ef4444", button_text_color: "#ffffff", button_font_size: 20, button_border_radius: 3, button_border_color: "#ef4444", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_2", _button_font_size_runtime_vw: 1.0416666666666665 }],
-response_ends_trial: true,
-require_response: false,
-__canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
+const test_stimuli_Consentimiento = [{
+    components: [{
+      type: "HtmlComponent",
+      coordinates: {"x":0,"y":10},
+      zIndex: 1,
+
+      stimulus: `
+        <div style="
+          box-sizing: border-box;
+          width: 840px;
+          max-width: 840px;
+          margin: 0 auto;
+          font-family: sans-serif;
+          font-size: 30px;
+          line-height: 1.4;
+          text-align: left;
+          color: #000000;
+        ">
+
+          <div style="
+            text-align: center;
+            font-size: 38px;
+            font-weight: bold;
+            margin-bottom: 28px;
+          ">
+            CONSENTIMIENTO INFORMADO
+          </div>
+
+          <p style="
+            margin: 0 0 20px 0;
+          ">
+            Por medio del presente acepto participar en el proyecto de investigación
+            <strong>"Forward Flow en población mexicana"</strong>.
+            Este estudio tiene como objetivo comprender cómo diferentes personas
+            procesan información léxica de manera espontánea.
+          </p>
+
+          <p style="
+            margin: 0 0 20px 0;
+          ">
+            Mi participación será completamente en línea, tendrá una duración
+            aproximada de <strong>10 minutos</strong> e incluirá un cuestionario
+            sociodemográfico, una prueba de reconocimiento de palabras, una prueba
+            de creatividad y una prueba de producción de palabras.
+          </p>
+
+          <p style="
+            margin: 0 0 14px 0;
+          ">
+            Soy consciente de que:
+          </p>
+
+          <ul style="
+            box-sizing: border-box;
+            margin: 0 0 20px 0;
+            padding-left: 40px;
+          ">
+            <li style="margin-bottom: 8px;">
+              Mi participación es totalmente voluntaria y puedo detenerla en
+              cualquier momento sin consecuencias.
+            </li>
+
+            <li style="margin-bottom: 8px;">
+              El estudio no implica riesgos físicos ni psicológicos relevantes.
+            </li>
+
+            <li>
+              Los datos que proporcione serán tratados de manera confidencial y
+              utilizados únicamente con fines de investigación.
+            </li>
+          </ul>
+
+          <p style="
+            margin: 0;
+          ">
+            He leído esta información y manifiesto mi decisión libre, consciente
+            y voluntaria de participar.
+          </p>
+
+        </div>
+      `,
+
+      name: "HtmlComponent_1"
+    }],
+
+    response_components: [
+      {
+        type: "ButtonResponseComponent",
+        coordinates: {"x":-11,"y":-90},
+        zIndex: 2,
+        choices: ["Acepto"],
+        button_color: "#22c55e",
+        button_text_color: "#ffffff",
+        button_font_size: 20,
+        button_border_radius: 3,
+        button_border_color: "#22c55e",
+        button_border_width: 1,
+        button_padding: "6px 25px",
+        name: "ButtonResponseComponent_1",
+        _button_font_size_runtime_vw: 1.0416666666666665
+      },
+      {
+        type: "ButtonResponseComponent",
+        coordinates: {"x":11,"y":-90},
+        zIndex: 3,
+        choices: ["No acepto"],
+        button_color: "#ef4444",
+        button_text_color: "#ffffff",
+        button_font_size: 20,
+        button_border_radius: 3,
+        button_border_color: "#ef4444",
+        button_border_width: 1,
+        button_padding: "6px 14px",
+        name: "ButtonResponseComponent_2",
+        _button_font_size_runtime_vw: 1.0416666666666665
+      }
+    ],
+
+    response_ends_trial: true,
+    require_response: false,
+
+    __canvasStyles: {
+      "backgroundColor":"#ffffff",
+      "width":1920,
+      "height":1080,
+      "fullScreen":true,
+      "progressBar":false
+    }
+  }];
     const Consentimiento_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
@@ -2476,11 +3166,101 @@ data: {
   
 
 
-const test_stimuli_intro_demographic = [{components: [{ type: "HtmlComponent", coordinates: {"x":0,"y":11.944444444444445}, zIndex: 1, stimulus: "<p id=\"i31f\" style=\"box-sizing: border-box;\"></p><h2 style=\"box-sizing: border-box;\">Cuestionario sociodemográfico</h2><p style=\"box-sizing: border-box;\">En esta sección proporcionarás algunos datos personales. Recuerda que todos los datos son anónimos.</p><p id=\"ier4\" style=\"box-sizing: border-box; margin-top: 20px;\">Cuando estés listo, haz clic en <strong style=\"box-sizing: border-box;\">\"Comenzar\"</strong> para continuar.</p><p style=\"box-sizing: border-box;\"></p>", name: "HtmlComponent_1" }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-18.054185829042073}, zIndex: 2, choices: ["Comenzar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
-response_ends_trial: true,
-require_response: true,
-__canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
+const test_stimuli_intro_demographic = [{
+  components: [{
+    type: "HtmlComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": 11.944444444444445
+    },
+
+    zIndex: 1,
+
+    stimulus: `
+      <div style="
+        box-sizing: border-box;
+        width: 840px;
+        max-width: 840px;
+        margin: 0 auto;
+        font-family: sans-serif;
+        text-align: center;
+        color: #000000;
+      ">
+
+        <div style="
+          font-size: 42px;
+          font-weight: bold;
+          line-height: 1.25;
+          margin-bottom: 32px;
+        ">
+          Cuestionario sociodemográfico
+        </div>
+
+        <p style="
+          margin: 0 0 26px 0;
+          font-size: 30px;
+          line-height: 1.45;
+        ">
+          En esta sección proporcionarás algunos datos personales.
+          Recuerda que todos los datos son anónimos.
+        </p>
+
+        <p style="
+          margin: 0;
+          font-size: 30px;
+          line-height: 1.45;
+        ">
+          Cuando estés listo, haz clic en
+          <strong>"Comenzar"</strong>
+          para continuar.
+        </p>
+
+      </div>
+    `,
+
+    name: "HtmlComponent_1"
+  }],
+
+  response_components: [{
+    type: "ButtonResponseComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": -25
+    },
+
+    zIndex: 2,
+
+    choices: ["Comenzar"],
+
+    button_color: "#ffffff",
+    button_text_color: "#000000",
+
+    button_font_size: 28,
+
+    button_border_radius: 3,
+    button_border_color: "#000000",
+    button_border_width: 1,
+
+    button_padding: "10px 22px",
+
+    name: "ButtonResponseComponent_1",
+
+    _button_font_size_runtime_vw: 1.4583333333333333
+  }],
+
+  response_ends_trial: true,
+  require_response: true,
+
+  __canvasStyles: {
+    "backgroundColor": "#ffffff",
+    "width": 1920,
+    "height": 1080,
+    "fullScreen": true,
+    "progressBar": false
+  }
+}];
     const intro_demographic_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
@@ -2638,11 +3418,118 @@ data: {
   
 
 
-const test_stimuli_birthdate = [{components: [{ type: "HtmlComponent", coordinates: {"x":0.41666666666666075,"y":7.407407407407406}, zIndex: 1, name: "HtmlComponent_1", stimulus: "" }, { type: "TextComponent", coordinates: {"x":0,"y":4.8717644300589455}, zIndex: 4, text: "Fecha de nacimiento:", font_color: "#000000", font_size: 28, font_family: "sans-serif", font_weight: "normal", font_style: "normal", text_align: "center", line_height: 1.5, background_color: "transparent", padding: "0px", border_radius: 0, border_color: "transparent", border_width: 0, name: "TextComponent_1", _font_size_runtime_vw: 1.09375 }],
-response_components: [{ type: "InputResponseComponent", coordinates: {"x":0,"y":-7.290755003236615}, width: 8.378906250000002, height: 2.28515625, zIndex: 2, text: "%%", check_answers: false, allow_blanks: true, name: "InputResponseComponent_1", input_type: "date", _input_font_size_runtime_vw: 1.5234375, input_font_size: 39 }, { type: "ButtonResponseComponent", coordinates: {"x":0,"y":-24.35882215029482}, zIndex: 3, choices: ["Continuar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 0.78125 }],
-response_ends_trial: true,
-require_response: true,
-__canvasStyles: {"backgroundColor":"#ffffff","width":2560,"height":1450,"fullScreen":true,"progressBar":false}}];
+const test_stimuli_birthdate = [{
+  components: [
+    {
+      type: "HtmlComponent",
+      coordinates: {
+        "x": 0,
+        "y": 0
+      },
+      zIndex: 1,
+      name: "HtmlComponent_1",
+      stimulus: ""
+    },
+
+    {
+      type: "TextComponent",
+
+      coordinates: {
+        "x": 0,
+        "y": 18
+      },
+
+      zIndex: 4,
+
+      text: "Fecha de nacimiento:",
+
+      font_color: "#000000",
+      font_size: 42,
+      font_family: "sans-serif",
+      font_weight: "normal",
+      font_style: "normal",
+      text_align: "center",
+      line_height: 1.5,
+
+      background_color: "transparent",
+      padding: "0px",
+      border_radius: 0,
+      border_color: "transparent",
+      border_width: 0,
+
+      name: "TextComponent_1",
+
+      _font_size_runtime_vw: 2.1875
+    }
+  ],
+
+  response_components: [
+    {
+      type: "InputResponseComponent",
+
+      coordinates: {
+        "x": 0,
+        "y": 0
+      },
+
+      width: 12,
+      height: 4,
+
+      zIndex: 2,
+
+      text: "%%",
+
+      check_answers: false,
+      allow_blanks: true,
+
+      name: "InputResponseComponent_1",
+
+      input_type: "date",
+
+      input_font_size: 30,
+      _input_font_size_runtime_vw: 1.5625
+    },
+
+    {
+      type: "ButtonResponseComponent",
+
+      coordinates: {
+        "x": 0,
+        "y": -22
+      },
+
+      zIndex: 3,
+
+      choices: ["Continuar"],
+
+      button_color: "#ffffff",
+      button_text_color: "#000000",
+
+      button_font_size: 28,
+
+      button_border_radius: 3,
+      button_border_color: "#000000",
+      button_border_width: 1,
+
+      button_padding: "10px 22px",
+
+      name: "ButtonResponseComponent_1",
+
+      _button_font_size_runtime_vw: 1.4583333333333333
+    }
+  ],
+
+  response_ends_trial: true,
+  require_response: true,
+
+  __canvasStyles: {
+    "backgroundColor": "#ffffff",
+    "width": 1920,
+    "height": 1080,
+    "fullScreen": true,
+    "progressBar": false
+  }
+}];
     const birthdate_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
@@ -2800,9 +3687,62 @@ data: {
   
 
 
-const test_stimuli_demographics = [{components: [],
-response_components: [{ type: "SurveyComponent", coordinates: {"x":0,"y":0}, zIndex: 1, survey_json: {"pages":[{"elements":[{"type":"text","name":"question1","title":"Your question here"}]}],"elements":[{"type":"radiogroup","name":"question1","title":"¿Eres mexicano?","isRequired":true,"choices":[{"value":"Sí","text":"Sí","imageLink":""},{"value":"No","text":"No","imageLink":""}]},{"type":"radiogroup","name":"question2","title":"¿El español es tu lengua materna?","isRequired":true,"choices":[{"value":"Sí","text":"Sí","imageLink":""},{"value":"No","text":"No","imageLink":""}]},{"type":"radiogroup","name":"question3","title":"Sexo biológico","isRequired":true,"choices":[{"value":"Hombre","text":"Hombre","imageLink":""},{"value":"Mujer","text":"Mujer","imageLink":""},{"value":"Prefiero no contestar","text":"Prefiero no contestar","imageLink":""}]}],"themeVariables":{"--sjs-primary-backcolor":"#000000","--sjs-general-forecolor":"#000000"}}, name: "SurveyComponent_1" }],
-__canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
+const test_stimuli_demographics = [{
+  components: [],
+  response_components: [{
+    type: "SurveyComponent",
+    coordinates: {"x":0,"y":0},
+    zIndex: 1,
+    survey_json: {
+      completeText: "Continuar",
+      showQuestionNumbers: "off",
+      locale: "es",
+      "pages":[{"elements":[{"type":"text","name":"question1","title":"Your question here"}]}],
+      "elements":[
+        {
+          "type":"radiogroup",
+          "name":"question1",
+          "title":"¿Eres mexicano?",
+          "isRequired":true,
+          requiredErrorText: "Respuesta requerida.",
+          "choices":[
+            {"value":"Sí","text":"Sí","imageLink":""},
+            {"value":"No","text":"No","imageLink":""}
+          ]
+        },
+        {
+          "type":"radiogroup",
+          "name":"question2",
+          "title":"¿El español es tu lengua materna?",
+          "isRequired":true,
+          requiredErrorText: "Respuesta requerida.",
+          "choices":[
+            {"value":"Sí","text":"Sí","imageLink":""},
+            {"value":"No","text":"No","imageLink":""}
+          ]
+        },
+        {
+          "type":"radiogroup",
+          "name":"question3",
+          "title":"Sexo biológico",
+          "isRequired":true,
+          requiredErrorText: "Respuesta requerida.",
+          "choices":[
+            {"value":"Hombre","text":"Hombre","imageLink":""},
+            {"value":"Mujer","text":"Mujer","imageLink":""},
+            {"value":"Prefiero no contestar","text":"Prefiero no contestar","imageLink":""}
+          ]
+        }
+      ],
+      "themeVariables":{
+        "--sjs-primary-backcolor":"#000000",
+        "--sjs-general-forecolor":"#000000"
+      }
+    },
+    name: "SurveyComponent_1"
+  }],
+  __canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}
+}];
     const demographics_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
@@ -2958,9 +3898,244 @@ data: {
   
 
 
-const test_stimuli_instructions = [{components: [{ type: "HtmlComponent", coordinates: {"x":0,"y":0}, zIndex: 1, stimulus: "<p id=\"ivta\" style=\"box-sizing: border-box;\"></p><h2 style=\"box-sizing: border-box;\">INSTRUCCIONES</h2><p style=\"box-sizing: border-box;\">En la parte superior verás la <strong style=\"box-sizing: border-box;\">palabra inicial</strong>. Tu tarea es completar los recuadros escribiendo la primera palabra que se te venga a la mente a partir de la palabra anterior.</p><p style=\"box-sizing: border-box;\">Debes escribir en total <strong style=\"box-sizing: border-box;\">20 palabras</strong>, una en cada recuadro.</p><ol style=\"box-sizing: border-box;\"><li style=\"box-sizing: border-box;\">Piensa en la palabra inicial que aparece arriba.</li><li style=\"box-sizing: border-box;\">Escribe en el primer recuadro <strong style=\"box-sizing: border-box;\">una sola palabra</strong> que te venga a la mente.</li><li style=\"box-sizing: border-box;\">Después, usa siempre tu <strong style=\"box-sizing: border-box;\">última palabra escrita</strong> como estímulo para la siguiente casilla.</li><li style=\"box-sizing: border-box;\">Completa los 19 recuadros y pulsa <strong style=\"box-sizing: border-box;\">“Continuar”</strong>.</li></ol><h3 style=\"box-sizing: border-box;\">Reglas</h3><ul style=\"box-sizing: border-box;\"><li style=\"box-sizing: border-box;\">Una sola <strong style=\"box-sizing: border-box;\">palabra por recuadro</strong></li><li style=\"box-sizing: border-box;\">No uses <b style=\"box-sizing: border-box;\">frases </b>(echar la sal)<b style=\"box-sizing: border-box;\"> </b>o conceptos conformados por <b style=\"box-sizing: border-box;\">varias palabras</b> (cepillo de dientes).</li><li style=\"box-sizing: border-box;\">No uses <strong style=\"box-sizing: border-box;\">nombres propios</strong> (Miguel, <i style=\"box-sizing: border-box;\">Uber, </i>Cancún, etc.).</li><li style=\"box-sizing: border-box;\">No uses palabras en <b style=\"box-sizing: border-box;\">otros idiomas </b>(<i style=\"box-sizing: border-box;\">party, marketing</i>).</li><li style=\"box-sizing: border-box;\"><strong style=\"box-sizing: border-box;\">No repitas</strong> palabras.</li><li style=\"box-sizing: border-box;\">Responde de forma <strong style=\"box-sizing: border-box;\">rápida y natural</strong>, sin borrar ni corregir.</li><li style=\"box-sizing: border-box;\">Si te bloqueas, escribe la <strong style=\"box-sizing: border-box;\">primera palabra</strong> que puedas y continúa.</li></ul><p style=\"box-sizing: border-box;\"><em style=\"box-sizing: border-box;\">No hay respuestas correctas o incorrectas; lo importante es contestar tan fluidamente como puedas.</em></p><p style=\"box-sizing: border-box;\"></p>", name: "HtmlComponent_1" }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-67.34497888610922}, zIndex: 2, choices: ["Continuar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
-__canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
+const test_stimuli_instructions = [{
+  components: [{
+    type: "HtmlComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": 5
+    },
+
+    zIndex: 1,
+
+    stimulus: `
+      <div style="
+        box-sizing: border-box;
+        width: 840px;
+        max-width: 840px;
+        margin: 0 auto;
+
+        font-family: sans-serif;
+        color: #000000;
+        text-align: left;
+      ">
+
+        <!-- TÍTULO -->
+        <div style="
+          text-align: center;
+          font-size: 42px;
+          font-weight: bold;
+          line-height: 1.2;
+          margin-bottom: 22px;
+        ">
+          Tarea de asociación de palabras
+        </div>
+
+
+        <!-- INTRODUCCIÓN -->
+        <p style="
+          margin: 0 0 20px 0;
+          font-size: 26px;
+          line-height: 1.4;
+        ">
+          En la parte superior aparecerá una
+          <strong>palabra inicial</strong>.
+          A partir de ella deberás construir una cadena de palabras
+          escribiendo lo primero que se te venga a la mente.
+        </p>
+
+
+        <!-- CÓMO FUNCIONA -->
+        <div style="
+          box-sizing: border-box;
+          padding: 20px 24px;
+          margin-bottom: 18px;
+
+          border: 2px solid #dddddd;
+          border-radius: 14px;
+          background: #fafafa;
+        ">
+
+          <div style="
+            font-size: 29px;
+            font-weight: bold;
+            margin-bottom: 14px;
+          ">
+            ¿Cómo funciona?
+          </div>
+
+          <div style="
+            font-size: 24px;
+            line-height: 1.4;
+            margin-bottom: 16px;
+          ">
+            Escribe una sola palabra relacionada con la palabra anterior.
+            Después, utiliza siempre tu
+            <strong>última respuesta</strong>
+            como punto de partida para la siguiente.
+          </div>
+
+          <div style="
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 25px;
+            font-weight: 600;
+            line-height: 1.4;
+            padding: 14px 12px;
+
+            background: #ffffff;
+            border-radius: 10px;
+          ">
+            PALABRA INICIAL
+            &nbsp;→&nbsp;
+            palabra 1
+            &nbsp;→&nbsp;
+            palabra 2
+            &nbsp;→&nbsp;
+            palabra 3
+            &nbsp;→&nbsp; …
+          </div>
+
+        </div>
+
+
+        <!-- DOS TARJETAS -->
+        <div style="
+          display: flex;
+          gap: 18px;
+          margin-bottom: 18px;
+        ">
+
+          <!-- RESPONDE ASÍ -->
+          <div style="
+            box-sizing: border-box;
+            flex: 1;
+
+            padding: 18px 22px;
+
+            border: 2px solid #dddddd;
+            border-radius: 14px;
+            background: #ffffff;
+          ">
+
+            <div style="
+              font-size: 28px;
+              font-weight: bold;
+              margin-bottom: 10px;
+            ">
+              Responde así
+            </div>
+
+            <div style="
+              font-size: 23px;
+              line-height: 1.4;
+            ">
+              • Una sola palabra por recuadro.<br>
+              • Responde de forma rápida y natural.<br>
+              • Usa siempre la última palabra escrita.<br>
+              • Completa todos los recuadros.
+            </div>
+
+          </div>
+
+
+          <!-- EVITA -->
+          <div style="
+            box-sizing: border-box;
+            flex: 1;
+
+            padding: 18px 22px;
+
+            border: 2px solid #dddddd;
+            border-radius: 14px;
+            background: #ffffff;
+          ">
+
+            <div style="
+              font-size: 28px;
+              font-weight: bold;
+              margin-bottom: 10px;
+            ">
+              Evita
+            </div>
+
+            <div style="
+              font-size: 23px;
+              line-height: 1.4;
+            ">
+              • Frases o expresiones de varias palabras.<br>
+              • Nombres propios.<br>
+              • Palabras en otros idiomas.<br>
+              • Repetir palabras anteriores.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- NOTA FINAL -->
+        <div style="
+          box-sizing: border-box;
+
+          padding: 16px 22px;
+
+          background: #f1f1f1;
+          border-radius: 12px;
+
+          text-align: center;
+          font-size: 24px;
+          line-height: 1.4;
+        ">
+          No hay respuestas correctas o incorrectas.
+          Si te bloqueas, escribe la
+          <strong>primera palabra que se te ocurra</strong>
+          y continúa.
+        </div>
+
+      </div>
+    `,
+
+    name: "HtmlComponent_1"
+  }],
+
+  response_components: [{
+    type: "ButtonResponseComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": -86
+    },
+
+    zIndex: 2,
+
+    choices: ["Continuar"],
+
+    button_color: "#ffffff",
+    button_text_color: "#000000",
+
+    button_font_size: 28,
+
+    button_border_radius: 3,
+    button_border_color: "#000000",
+    button_border_width: 1,
+
+    button_padding: "10px 22px",
+
+    name: "ButtonResponseComponent_1",
+
+    _button_font_size_runtime_vw: 1.4583333333333333
+  }],
+
+  __canvasStyles: {
+    "backgroundColor": "#ffffff",
+    "width": 1920,
+    "height": 1080,
+    "fullScreen": true,
+    "progressBar": false
+  }
+}];
     const instructions_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
@@ -3499,6 +4674,93 @@ data: {
     }
   }
 ];
+
+// ============================================================
+// AJUSTE VISUAL DE FORWARD FLOW
+// ============================================================
+
+test_stimuli_loop_1789348375639.forEach(function(stimulus) {
+
+  // ----------------------------------------------------------
+  // PALABRA INICIAL: AMIGO / GENTE / DIFERENCIA / OSO / MESA
+  // ----------------------------------------------------------
+  const verticalOffset = -12;
+  const title =
+    stimulus.components_forward_flow_task?.find(function(component) {
+      return component.type === "TextComponent";
+    });
+
+  if (title) {
+
+    title.font_size = 45;
+
+    // 48px sobre un diseño de 1920px
+    title._font_size_runtime_vw = 2.5;
+
+    // Mantenerla cerca de la parte superior
+    title.coordinates.y = 95 + verticalOffset;
+  }
+
+
+  // ----------------------------------------------------------
+  // 19 CAMPOS DE RESPUESTA
+  // ----------------------------------------------------------
+
+  const inputComponent =
+    stimulus.response_components_forward_flow_task?.find(
+      function(component) {
+        return component.type === "InputResponseComponent";
+      }
+    );
+
+  if (inputComponent) {
+
+    // Antes: 7
+    // Ahora: 16% de 1920 = ~307px internos
+    inputComponent.width = 16;
+
+    // Antes: 1.5625 (~30px)
+    // Ahora: ~36px
+    inputComponent.height = 1.9;
+
+    inputComponent.input_font_size = 28;
+
+    // 28px sobre 1920px
+    inputComponent._input_font_size_runtime_vw =
+      1.4583333333333333;
+
+    // Mantener la columna centrada
+    inputComponent.coordinates.x = 0;
+    inputComponent.coordinates.y = 13.133872641633134 + verticalOffset;
+  }
+
+
+  // ----------------------------------------------------------
+  // BOTÓN CONTINUAR
+  // ----------------------------------------------------------
+
+  const button =
+    stimulus.response_components_forward_flow_task?.find(
+      function(component) {
+        return component.type === "ButtonResponseComponent";
+      }
+    );
+
+  if (button) {
+
+    button.button_font_size = 28;
+
+    button._button_font_size_runtime_vw =
+      1.4583333333333333;
+
+    button.button_padding = "10px 22px";
+
+    // Lo bajamos porque los 19 inputs ahora son más altos
+    button.coordinates.x = 0;
+    button.coordinates.y = -70 + verticalOffset;
+  }
+
+});
     
     
     
@@ -3814,9 +5076,90 @@ timeline.push(loop_1789348375639_procedure);
 
 
 
-const test_stimuli_intro_creativity = [{components: [{ type: "HtmlComponent", coordinates: {"x":0,"y":18.627334585519588}, zIndex: 3, stimulus: "<p id=\"iy2i\" style=\"box-sizing: border-box;\"></p><h2 id=\"ic85\" style=\"box-sizing: border-box;\">Tarea de creatividad</h2><p id=\"iyio\" style=\"box-sizing: border-box;\"></p><p id=\"ifig\" style=\"box-sizing: border-box; margin-top: 20px;\">Cuando estés listo, haz clic en <strong id=\"i07y\" style=\"box-sizing: border-box;\">\"Comenzar\"</strong> para continuar.</p><p id=\"i2l2v\" style=\"box-sizing: border-box;\"></p>", name: "HtmlComponent_1" }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":0}, zIndex: 2, choices: ["Comenzar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
-__canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
+const test_stimuli_intro_creativity = [{
+  components: [{
+    type: "HtmlComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": 12
+    },
+
+    zIndex: 3,
+
+    stimulus: `
+      <div style="
+        box-sizing: border-box;
+        width: 840px;
+        max-width: 840px;
+        margin: 0 auto;
+
+        font-family: sans-serif;
+        text-align: center;
+        color: #000000;
+      ">
+
+        <div style="
+          font-size: 42px;
+          font-weight: bold;
+          line-height: 1.25;
+          margin-bottom: 32px;
+        ">
+          Tarea de creatividad
+        </div>
+
+        <p style="
+          margin: 0;
+          font-size: 30px;
+          line-height: 1.45;
+        ">
+          Cuando estés listo, haz clic en
+          <strong>"Comenzar"</strong>
+          para continuar.
+        </p>
+
+      </div>
+    `,
+
+    name: "HtmlComponent_1"
+  }],
+
+  response_components: [{
+    type: "ButtonResponseComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": -18
+    },
+
+    zIndex: 2,
+
+    choices: ["Comenzar"],
+
+    button_color: "#ffffff",
+    button_text_color: "#000000",
+
+    button_font_size: 28,
+
+    button_border_radius: 3,
+    button_border_color: "#000000",
+    button_border_width: 1,
+
+    button_padding: "10px 22px",
+
+    name: "ButtonResponseComponent_1",
+
+    _button_font_size_runtime_vw: 1.4583333333333333
+  }],
+
+  __canvasStyles: {
+    "backgroundColor": "#ffffff",
+    "width": 1920,
+    "height": 1080,
+    "fullScreen": true,
+    "progressBar": false
+  }
+}];
     const intro_creativity_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
@@ -3972,9 +5315,259 @@ data: {
   
 
 
-const test_stimuli_instructions_creativity = [{components: [{ type: "HtmlComponent", coordinates: {"x":0,"y":14.04214453369936}, zIndex: 3, stimulus: "<p id=\"i4h5\" style=\"box-sizing: border-box;\"><span id=\"ikt1\" style=\"box-sizing: border-box; font-size: 30px; font-family: 'Aptos',sans-serif; mso-ascii-theme-font: minor-latin; mso-fareast-font-family: Aptos; mso-fareast-theme-font: minor-latin; mso-hansi-theme-font: minor-latin; mso-bidi-font-family: 'Times New Roman'; mso-bidi-theme-font: minor-bidi; mso-ansi-language: #1000; mso-fareast-language: EN-US; mso-bidi-language: AR-SA; text-align: justify; letter-spacing: 0px; line-height: 50px;\">Esta tarea mide tu capacidad para generar la\nmayor cantidad posible de ideas creativas en un breve periodo de tiempo. <br id=\"ifqu\" style=\"box-sizing: border-box;\">Se te\nproporcionará el nombre de un objeto de uso común y deberás generar tantos usos\ncreativos e inusuales para ese <br id=\"iecq\" style=\"box-sizing: border-box;\">objeto como puedas imaginar, <b id=\"izfv\" style=\"box-sizing: border-box;\">EVITANDO</b> al\nmismo tiempo los usos estándar o poco originales (por ejemplo, si el objeto <br id=\"i3zjt\" style=\"box-sizing: border-box;\">es\nuna ‘silla’, responder ‘sentarse’ o ‘usarla para alcanzar algo en un estante’\nno se considerarán usos creativos para ese <br id=\"i8ba3\" style=\"box-sizing: border-box;\">objeto). Deberás completar esta\ntarea 2 veces, cada una con un objeto diferente. En cada ocasión dispondrás\núnicamente <br id=\"it7gy\" style=\"box-sizing: border-box;\">de 2 minutos para generar tantos usos creativos como te sea posible,\npor lo que te pedimos que te mantengas concentrado. <br id=\"i9pvs\" style=\"box-sizing: border-box;\">Una vez que hagas clic en\nel botón <b id=\"idwk\" style=\"box-sizing: border-box;\">SIGUIENTE</b>, el tiempo comenzará a correr.</span></p>", name: "HtmlComponent_1" }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-38.68754106223298}, zIndex: 2, choices: ["Continuar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
-__canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
+const test_stimuli_instructions_creativity = [{
+  components: [{
+    type: "HtmlComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": 7
+    },
+
+    zIndex: 3,
+
+    stimulus: `
+      <div style="
+        box-sizing: border-box;
+        width: 840px;
+        max-width: 840px;
+        margin: 0 auto;
+
+        font-family: sans-serif;
+        color: #000000;
+        text-align: left;
+      ">
+
+        <!-- TÍTULO -->
+        <div style="
+          text-align: center;
+          font-size: 42px;
+          font-weight: bold;
+          line-height: 1.2;
+          margin-bottom: 26px;
+        ">
+          Tarea de creatividad
+        </div>
+
+
+        <!-- INTRODUCCIÓN -->
+        <p style="
+          margin: 0 0 24px 0;
+          font-size: 26px;
+          line-height: 1.4;
+        ">
+          Esta tarea mide tu capacidad para generar
+          <strong>ideas creativas</strong>
+          en un breve periodo de tiempo.
+        </p>
+
+
+        <!-- BLOQUE 1 -->
+        <div style="
+          box-sizing: border-box;
+          padding: 22px 26px;
+          margin-bottom: 18px;
+
+          border: 2px solid #dddddd;
+          border-radius: 14px;
+
+          background: #fafafa;
+        ">
+
+          <div style="
+            font-size: 29px;
+            font-weight: bold;
+            margin-bottom: 10px;
+          ">
+            ¿Qué tendrás que hacer?
+          </div>
+
+          <div style="
+            font-size: 25px;
+            line-height: 1.4;
+          ">
+            Se te proporcionará el nombre de un
+            <strong>objeto de uso común</strong>.
+            Deberás escribir tantos
+            <strong>usos creativos e inusuales</strong>
+            como puedas imaginar.
+          </div>
+
+        </div>
+
+
+        <!-- BLOQUE 2 -->
+        <div style="
+          box-sizing: border-box;
+          padding: 22px 26px;
+          margin-bottom: 18px;
+
+          border: 2px solid #dddddd;
+          border-radius: 14px;
+
+          background: #ffffff;
+        ">
+
+          <div style="
+            font-size: 29px;
+            font-weight: bold;
+            margin-bottom: 10px;
+          ">
+            Evita los usos comunes
+          </div>
+
+          <div style="
+            font-size: 25px;
+            line-height: 1.4;
+          ">
+            No escribas usos estándar o poco originales.
+            Por ejemplo, si el objeto fuera una
+            <strong>“silla”</strong>,
+            respuestas como
+            <em>“sentarse”</em>
+            o
+            <em>“usarla para alcanzar algo en un estante”</em>
+            no se considerarían usos creativos.
+          </div>
+
+        </div>
+
+
+        <!-- BLOQUE 3 -->
+        <div style="
+          box-sizing: border-box;
+          display: flex;
+          gap: 18px;
+          margin-bottom: 20px;
+        ">
+
+          <div style="
+            box-sizing: border-box;
+            flex: 1;
+
+            padding: 18px 22px;
+
+            border: 2px solid #dddddd;
+            border-radius: 14px;
+
+            text-align: center;
+          ">
+
+            <div style="
+              font-size: 30px;
+              font-weight: bold;
+              margin-bottom: 6px;
+            ">
+              2 objetos
+            </div>
+
+            <div style="
+              font-size: 24px;
+              line-height: 1.35;
+            ">
+              Realizarás esta tarea dos veces,
+              con un objeto diferente cada vez.
+            </div>
+
+          </div>
+
+
+          <div style="
+            box-sizing: border-box;
+            flex: 1;
+
+            padding: 18px 22px;
+
+            border: 2px solid #dddddd;
+            border-radius: 14px;
+
+            text-align: center;
+          ">
+
+            <div style="
+              font-size: 30px;
+              font-weight: bold;
+              margin-bottom: 6px;
+            ">
+              2 minutos
+            </div>
+
+            <div style="
+              font-size: 24px;
+              line-height: 1.35;
+            ">
+              Tendrás dos minutos para generar
+              tantos usos como te sea posible.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- AVISO FINAL -->
+        <div style="
+          box-sizing: border-box;
+
+          padding: 16px 22px;
+
+          border-radius: 12px;
+
+          background: #f1f1f1;
+
+          text-align: center;
+
+          font-size: 25px;
+          line-height: 1.35;
+        ">
+          El tiempo comenzará en cuanto pulses
+          <strong>“Continuar”</strong>.
+          Mantente concentrado y responde con las ideas
+          que se te ocurran.
+        </div>
+
+      </div>
+    `,
+
+    name: "HtmlComponent_1"
+  }],
+
+  response_components: [{
+    type: "ButtonResponseComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": -86
+    },
+
+    zIndex: 2,
+
+    choices: ["Continuar"],
+
+    button_color: "#ffffff",
+    button_text_color: "#000000",
+
+    button_font_size: 28,
+
+    button_border_radius: 3,
+    button_border_color: "#000000",
+    button_border_width: 1,
+
+    button_padding: "10px 22px",
+
+    name: "ButtonResponseComponent_1",
+
+    _button_font_size_runtime_vw: 1.4583333333333333
+  }],
+
+  __canvasStyles: {
+    "backgroundColor": "#ffffff",
+    "width": 1920,
+    "height": 1080,
+    "fullScreen": true,
+    "progressBar": false
+  }
+}];
     const instructions_creativity_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
@@ -4343,6 +5936,126 @@ data: {
     }
   }
 ];
+
+// ============================================================
+// AJUSTE VISUAL DE CREATIVIDAD 1
+// ============================================================
+
+test_stimuli_loop_1789347025155.forEach(function(stimulus) {
+
+  const components =
+    stimulus.components_creativity || [];
+
+
+  // ----------------------------------------------------------
+  // 1. NOMBRE DEL OBJETO
+  // ----------------------------------------------------------
+
+  const title = components[0];
+
+  if (title) {
+
+    title.font_size = 44;
+    title._font_size_runtime_vw =
+      2.2916666666666665;
+
+    title.coordinates.x = 0;
+    title.coordinates.y = 74;
+
+    title.font_weight = "bold";
+  }
+
+
+  // ----------------------------------------------------------
+  // 2. EJEMPLOS DE USOS COMUNES
+  // ----------------------------------------------------------
+
+  const examples = components[1];
+
+  if (examples) {
+
+    // Aproximadamente 806 px de ancho
+    // dentro de nuestra zona segura de 900 px.
+    examples.width = 42;
+
+    // Más altura para permitir varias líneas.
+    examples.height = 11;
+
+    examples.coordinates.x = 0;
+    examples.coordinates.y = 49;
+
+    examples.font_size = 24;
+    examples._font_size_runtime_vw = 1.25;
+
+    examples.line_height = 1.35;
+
+    examples.font_color = "#666666";
+  }
+
+
+  // ----------------------------------------------------------
+  // 3. ADVERTENCIA
+  // ----------------------------------------------------------
+
+  const warning = components[2];
+
+  if (warning) {
+
+    warning.width = 42;
+    warning.height = 8;
+
+    warning.coordinates.x = 0;
+    warning.coordinates.y = 25;
+
+    warning.font_size = 25;
+    warning._font_size_runtime_vw =
+      1.3020833333333333;
+
+    warning.line_height = 1.35;
+
+    warning.font_weight = "normal";
+  }
+
+
+  // ----------------------------------------------------------
+  // 4. CAJA DE RESPUESTA
+  // ----------------------------------------------------------
+
+  const input =
+    stimulus.response_components_creativity?.find(
+      function(component) {
+        return component.type === "InputResponseComponent";
+      }
+    );
+
+  if (input) {
+
+    // Aproximadamente 806 px de ancho.
+    input.width = 42;
+
+    // Caja bastante más alta para escribir varias ideas.
+    input.height = 22;
+
+    input.coordinates.x = 0;
+    input.coordinates.y = -28;
+
+    input.input_font_size = 26;
+
+    input._input_font_size_runtime_vw =
+      1.3541666666666667;
+
+    input.input_border_width = 2;
+    input.input_border_radius = 8;
+  }
+
+
+  // ----------------------------------------------------------
+  // 5. DURACIÓN REAL: 2 MINUTOS
+  // ----------------------------------------------------------
+
+  stimulus.trial_duration_creativity = 10000;//120000;
+
+});
     
     let creativityLongText = "";
     let creativityTextareaObserver = null;
@@ -4744,6 +6457,116 @@ const test_stimuli_instructions_creativity_2 = [{components: [{ type: "TextCompo
 response_components: [{ type: "InputResponseComponent", coordinates: {"x":0,"y":-43.51599276708275}, width: 36.380208333333336, height: 9.921875, zIndex: 2, text: "%%", check_answers: false, allow_blanks: true, name: "InputResponseComponent_1", input_font_size: 127, input_background_color: "#ffffff", input_border_color: "#000000", input_border_width: 2, _input_font_size_runtime_vw: 6.614583333333333 }, { type: "ButtonResponseComponent", coordinates: {"x":0,"y":-68.77785077730302}, zIndex: 3, choices: ["Continuar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
 __canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
 
+
+// ============================================================
+// AJUSTE VISUAL DE CREATIVIDAD 2
+// ============================================================
+
+{
+  const stimulus =
+    test_stimuli_instructions_creativity_2[0];
+
+
+  // ----------------------------------------------------------
+  // 1. TEXTO DE INSTRUCCIONES
+  // ----------------------------------------------------------
+
+  const instructions =
+    stimulus.components.find(function(component) {
+      return component.type === "TextComponent";
+    });
+
+  if (instructions) {
+
+    // Dentro de nuestra zona útil de 900px
+    instructions.width = 42;
+    instructions.height = 15;
+
+    instructions.coordinates.x = 0;
+    instructions.coordinates.y = 65;
+
+    instructions.font_size = 28;
+    instructions._font_size_runtime_vw =
+      1.4583333333333333;
+
+    instructions.line_height = 1.35;
+    instructions.text_align = "center";
+  }
+
+
+  // ----------------------------------------------------------
+  // 2. IMAGEN CON LAS TRES FIGURAS
+  // ----------------------------------------------------------
+
+  const image =
+    stimulus.components.find(function(component) {
+      return component.type === "ImageComponent";
+    });
+
+  if (image) {
+
+    // 42% de 1920 ≈ 806px
+    image.width = 42;
+
+    // Mantener aproximadamente su proporción original 3:1
+    image.height = 14;
+
+    image.coordinates.x = 0;
+    image.coordinates.y = 20;
+  }
+
+
+  // ----------------------------------------------------------
+  // 3. CAJA PARA ESCRIBIR
+  // ----------------------------------------------------------
+
+  const input =
+    stimulus.response_components.find(function(component) {
+      return component.type === "InputResponseComponent";
+    });
+
+  if (input) {
+
+    input.width = 42;
+    input.height = 18;
+
+    input.coordinates.x = 0;
+    input.coordinates.y = -40;
+
+    input.input_font_size = 26;
+    input._input_font_size_runtime_vw =
+      1.3541666666666667;
+
+    input.input_border_width = 2;
+    input.input_border_color = "#000000";
+    input.input_border_radius = 8;
+  }
+
+
+  // ----------------------------------------------------------
+  // 4. BOTÓN CONTINUAR
+  // ----------------------------------------------------------
+
+  const button =
+    stimulus.response_components.find(function(component) {
+      return component.type === "ButtonResponseComponent";
+    });
+
+  if (button) {
+
+    button.button_font_size = 28;
+
+    button._button_font_size_runtime_vw =
+      1.4583333333333333;
+
+    button.button_padding = "10px 22px";
+
+    button.coordinates.x = 0;
+    button.coordinates.y = -83;
+  }
+}
+
+
 let creativity2LongText = "";
 let creativity2TextareaObserver = null;
 
@@ -4980,9 +6803,90 @@ data: {
   
 
 
-const test_stimuli_intro_lextale = [{components: [{ type: "HtmlComponent", coordinates: {"x":0,"y":0}, zIndex: 1, stimulus: "<p id=\"ilvg\" style=\"box-sizing: border-box; text-align: center;\"></p><h2 style=\"box-sizing: border-box;\">Tarea de reconocimeinto de palabras</h2><p style=\"box-sizing: border-box;\"></p><p id=\"ilu9\" style=\"box-sizing: border-box; margin-top: 20px;\">Cuando estés listo, haz clic en <strong style=\"box-sizing: border-box;\">\"Comenzar\"</strong> para continuar.</p><p style=\"box-sizing: border-box;\"></p>", name: "HtmlComponent_1" }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-15.475016424893195}, zIndex: 2, choices: ["Continuar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
-__canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
+const test_stimuli_intro_lextale = [{
+  components: [{
+    type: "HtmlComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": 10
+    },
+
+    zIndex: 1,
+
+    stimulus: `
+      <div style="
+        box-sizing: border-box;
+        width: 840px;
+        max-width: 840px;
+        margin: 0 auto;
+
+        font-family: sans-serif;
+        text-align: center;
+        color: #000000;
+      ">
+
+        <div style="
+          font-size: 42px;
+          font-weight: bold;
+          line-height: 1.25;
+          margin-bottom: 32px;
+        ">
+          Tarea de reconocimiento de palabras
+        </div>
+
+        <p style="
+          margin: 0;
+          font-size: 30px;
+          line-height: 1.45;
+        ">
+          Cuando estés listo, haz clic en
+          <strong>“Continuar”</strong>
+          para comenzar.
+        </p>
+
+      </div>
+    `,
+
+    name: "HtmlComponent_1"
+  }],
+
+  response_components: [{
+    type: "ButtonResponseComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": -20
+    },
+
+    zIndex: 2,
+
+    choices: ["Continuar"],
+
+    button_color: "#ffffff",
+    button_text_color: "#000000",
+
+    button_font_size: 28,
+
+    button_border_radius: 3,
+    button_border_color: "#000000",
+    button_border_width: 1,
+
+    button_padding: "10px 22px",
+
+    name: "ButtonResponseComponent_1",
+
+    _button_font_size_runtime_vw: 1.4583333333333333
+  }],
+
+  __canvasStyles: {
+    "backgroundColor": "#ffffff",
+    "width": 1920,
+    "height": 1080,
+    "fullScreen": true,
+    "progressBar": false
+  }
+}];
     const intro_lextale_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
@@ -5138,9 +7042,218 @@ data: {
   
 
 
-const test_stimuli_instructions_lextale = [{components: [{ type: "HtmlComponent", coordinates: {"x":0,"y":32.38290474098019}, zIndex: 1, stimulus: "<p id=\"iixg\" style=\"box-sizing: border-box;\"></p><p id=\"ij9g\" style=\"box-sizing: border-box;\"><strong id=\"i93u\" style=\"box-sizing: border-box;\">Instrucciones</strong></p><p id=\"ibt6\" style=\"box-sizing: border-box;\">Este test consta de varias pruebas. En cada una de ellas verás una <strong id=\"iz9j\" style=\"box-sizing: border-box;\">secuencia de letras en español</strong>.</p><p id=\"ivi6q\" style=\"box-sizing: border-box;\">Tu tarea es decidir si se trata de una <strong id=\"ifrmj\" style=\"box-sizing: border-box;\">palabra real del español que conoces</strong>. <br style=\"box-sizing: border-box;\">Si piensas que <strong id=\"i00t7\" style=\"box-sizing: border-box;\">sí es una palabra del español</strong> que conoces, haz clic en el botón <strong id=\"i231y\" style=\"box-sizing: border-box;\">“sí”</strong>. <br style=\"box-sizing: border-box;\">Si piensas que <strong id=\"ir51s\" style=\"box-sizing: border-box;\">no es una palabra del español</strong> o no estás seguro, haz clic en <strong id=\"ipy7k\" style=\"box-sizing: border-box;\">“no”</strong>.</p><p id=\"irh7i\" style=\"box-sizing: border-box;\">Si estás seguro de que la palabra existe, aunque no sepas exactamente lo que significa, puedes responder <strong id=\"iiv8h\" style=\"box-sizing: border-box;\">“sí”</strong>. <br style=\"box-sizing: border-box;\">Pero si no estás seguro de que sea una palabra existente, debes responder <strong id=\"isa27\" style=\"box-sizing: border-box;\">“no”</strong>.</p><p id=\"i6qpc\" style=\"box-sizing: border-box;\"><strong id=\"icfdp\" style=\"box-sizing: border-box;\">Importante:</strong> los errores se penalizan. No tiene sentido marcar “sí” para muchas palabras que no conoces solo para intentar subir la puntuación.</p><p id=\"ij79i\" style=\"box-sizing: border-box;\"></p>", name: "HtmlComponent_1" }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-13.755570155460603}, zIndex: 2, choices: ["Continuar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
-__canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
+const test_stimuli_instructions_lextale = [{
+  components: [{
+    type: "HtmlComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": 5
+    },
+
+    zIndex: 1,
+
+    stimulus: `
+      <div style="
+        box-sizing: border-box;
+        width: 840px;
+        max-width: 840px;
+        margin: 0 auto;
+
+        font-family: sans-serif;
+        color: #000000;
+        text-align: left;
+      ">
+
+        <!-- TÍTULO -->
+        <div style="
+          text-align: center;
+          font-size: 42px;
+          font-weight: bold;
+          line-height: 1.2;
+          margin-bottom: 26px;
+        ">
+          Instrucciones
+        </div>
+
+
+        <!-- INTRODUCCIÓN -->
+        <p style="
+          margin: 0 0 22px 0;
+          font-size: 26px;
+          line-height: 1.4;
+        ">
+          En cada prueba verás una
+          <strong>secuencia de letras en español</strong>.
+          Tu tarea es decidir si se trata de una
+          <strong>palabra real del español que conoces</strong>.
+        </p>
+
+
+        <!-- SÍ / NO -->
+        <div style="
+          display: flex;
+          gap: 20px;
+          margin-bottom: 22px;
+        ">
+
+          <!-- SÍ -->
+          <div style="
+            box-sizing: border-box;
+            flex: 1;
+
+            padding: 22px 24px;
+
+            border: 2px solid #22c55e;
+            border-radius: 14px;
+
+            background: #ffffff;
+          ">
+
+            <div style="
+              text-align: center;
+              font-size: 32px;
+              font-weight: bold;
+              margin-bottom: 10px;
+            ">
+              SÍ
+            </div>
+
+            <div style="
+              font-size: 25px;
+              line-height: 1.4;
+              text-align: center;
+            ">
+              Responde <strong>“sí”</strong>
+              si estás seguro de que es una
+              palabra del español que conoces.
+            </div>
+
+          </div>
+
+
+          <!-- NO -->
+          <div style="
+            box-sizing: border-box;
+            flex: 1;
+
+            padding: 22px 24px;
+
+            border: 2px solid #ef4444;
+            border-radius: 14px;
+
+            background: #ffffff;
+          ">
+
+            <div style="
+              text-align: center;
+              font-size: 32px;
+              font-weight: bold;
+              margin-bottom: 10px;
+            ">
+              NO
+            </div>
+
+            <div style="
+              font-size: 25px;
+              line-height: 1.4;
+              text-align: center;
+            ">
+              Responde <strong>“no”</strong>
+              si no es una palabra del español
+              o si <strong>no estás seguro</strong>.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACLARACIÓN -->
+        <div style="
+          box-sizing: border-box;
+
+          padding: 20px 24px;
+          margin-bottom: 20px;
+
+          border: 2px solid #dddddd;
+          border-radius: 14px;
+
+          background: #fafafa;
+
+          font-size: 25px;
+          line-height: 1.4;
+        ">
+          Si estás seguro de que la palabra existe,
+          aunque no sepas exactamente lo que significa,
+          puedes responder <strong>“sí”</strong>.
+          Si tienes dudas sobre si realmente existe,
+          responde <strong>“no”</strong>.
+        </div>
+
+
+        <!-- ADVERTENCIA -->
+        <div style="
+          box-sizing: border-box;
+
+          padding: 18px 24px;
+
+          border: 2px solid #999999;
+          border-radius: 12px;
+
+          background: #f1f1f1;
+
+          font-size: 25px;
+          line-height: 1.4;
+        ">
+          <strong>Importante:</strong>
+          los errores se penalizan.
+          No conviene responder “sí” a palabras que no conoces
+          sólo para intentar aumentar la puntuación.
+        </div>
+
+      </div>
+    `,
+
+    name: "HtmlComponent_1"
+  }],
+
+  response_components: [{
+    type: "ButtonResponseComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": -70
+    },
+
+    zIndex: 2,
+
+    choices: ["Continuar"],
+
+    button_color: "#ffffff",
+    button_text_color: "#000000",
+
+    button_font_size: 28,
+
+    button_border_radius: 3,
+    button_border_color: "#000000",
+    button_border_width: 1,
+
+    button_padding: "10px 22px",
+
+    name: "ButtonResponseComponent_1",
+
+    _button_font_size_runtime_vw: 1.4583333333333333
+  }],
+
+  __canvasStyles: {
+    "backgroundColor": "#ffffff",
+    "width": 1920,
+    "height": 1080,
+    "fullScreen": true,
+    "progressBar": false
+  }
+}];
     const instructions_lextale_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
@@ -12140,7 +14253,78 @@ data: {
   }
 ];
     
-    
+// ============================================================
+// AJUSTE VISUAL DE LEXTALE
+// ============================================================
+
+test_stimuli_loop_1789350045376.forEach(function(stimulus) {
+
+  // ----------------------------------------------------------
+  // PALABRA / SECUENCIA DE LETRAS
+  // ----------------------------------------------------------
+
+  const word =
+    stimulus.components_lextale_task?.find(function(component) {
+      return component.type === "TextComponent";
+    });
+
+  if (word) {
+
+    word.font_size = 68;
+
+    word._font_size_runtime_vw =
+      3.5416666666666665;
+
+    word.font_family = "sans-serif";
+    word.font_weight = "normal";
+    word.font_style = "italic";
+
+    word.coordinates.x = 0;
+    word.coordinates.y = 22;
+  }
+
+
+  // ----------------------------------------------------------
+  // BOTONES SÍ / NO
+  // ----------------------------------------------------------
+
+  const buttons =
+    stimulus.response_components_lextale_task?.filter(
+      function(component) {
+        return component.type === "ButtonResponseComponent";
+      }
+    ) || [];
+
+
+  buttons.forEach(function(button) {
+
+    button.button_font_size = 34;
+
+    button._button_font_size_runtime_vw =
+      1.7708333333333333;
+
+    button.button_padding = "14px 34px";
+
+    button.button_border_radius = 8;
+
+    button.button_border_width = 2;
+    button.button_border_color = "#000000";
+
+    button.coordinates.y = -18;
+  });
+
+
+  // Botón NO
+  if (buttons[0]) {
+    buttons[0].coordinates.x = -15;
+  }
+
+  // Botón SÍ
+  if (buttons[1]) {
+    buttons[1].coordinates.x = 15;
+  }
+
+});
     
     const lextale_task_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components_lextale_task"),
@@ -12454,9 +14638,136 @@ timeline.push(loop_1789350045376_procedure);
 
 
 
-const test_stimuli_End_experiment = [{components: [{ type: "HtmlComponent", coordinates: {"x":0,"y":0}, zIndex: 1, stimulus: "<p id=\"i4oh\" style=\"box-sizing: border-box;\"></p><div id=\"io5t\" style=\"box-sizing: border-box; text-align: center; font-size: 60px; margin-bottom: 20px;\">✅</div><p id=\"i4yf\" style=\"box-sizing: border-box; text-align: center; font-size: 34px; font-weight: bold; color: rgb(27, 94, 32); margin-bottom: 10px;\">¡HAS TERMINADO LA PRUEBA!</p><p id=\"iln9\" style=\"box-sizing: border-box; text-align: center; font-size: 20px; margin-bottom: 20px;\">Tus respuestas se han <strong style=\"box-sizing: border-box;\">guardado correctamente</strong>.</p><p id=\"i5kqs\" style=\"box-sizing: border-box; text-align: center; margin-bottom: 10px;\">Cualquier duda o aclaración, puedes comunicarte con el <strong style=\"box-sizing: border-box;\">Dr. Julio Llamas Alonso</strong> al correo:<br style=\"box-sizing: border-box;\"><strong style=\"box-sizing: border-box;\">julio_llamas@uaeh.edu.mx</strong></p><p id=\"i0lfl\" style=\"box-sizing: border-box; text-align: center; font-size: 22px; font-weight: bold; color: rgb(183, 28, 28); margin-top: 30px;\">Ya no hay más preguntas.<br style=\"box-sizing: border-box;\">Ahora puedes <span id=\"i748f\" style=\"box-sizing: border-box; text-decoration: underline;\">cerrar esta pestaña del navegador</span>.</p><p style=\"box-sizing: border-box;\"></p>", name: "HtmlComponent_1" }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-43.84587987053069}, zIndex: 2, choices: ["Finalizar actividad"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
-__canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
+const test_stimuli_End_experiment = [{
+  components: [{
+    type: "HtmlComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": 8
+    },
+
+    zIndex: 1,
+
+    stimulus: `
+      <div style="
+        box-sizing: border-box;
+        width: 840px;
+        max-width: 840px;
+        margin: 0 auto;
+
+        font-family: sans-serif;
+        color: #000000;
+        text-align: center;
+      ">
+
+        <div style="
+          font-size: 58px;
+          line-height: 1;
+          margin-bottom: 22px;
+        ">
+          ✓
+        </div>
+
+
+        <div style="
+          font-size: 42px;
+          font-weight: bold;
+          line-height: 1.2;
+          margin-bottom: 22px;
+        ">
+          ¡Has terminado las preguntas!
+        </div>
+
+
+        <div style="
+          font-size: 28px;
+          line-height: 1.45;
+          margin-bottom: 28px;
+        ">
+          Para guardar tus respuestas y finalizar tu participación,
+          pulsa el botón que aparece al final de esta pantalla.
+        </div>
+
+
+        <div style="
+          box-sizing: border-box;
+
+          padding: 20px 24px;
+          margin-bottom: 24px;
+
+          background: #fafafa;
+          border: 2px solid #dddddd;
+          border-radius: 14px;
+
+          font-size: 24px;
+          line-height: 1.45;
+        ">
+          Si tienes alguna duda o aclaración, puedes comunicarte con
+          <strong>Dr. Julio Llamas Alonso</strong>
+          en:<br>
+          <strong>julio_llamas@uaeh.edu.mx</strong>
+        </div>
+
+
+        <div style="
+          box-sizing: border-box;
+
+          padding: 16px 22px;
+
+          background: #f1f1f1;
+          border-radius: 12px;
+
+          font-size: 24px;
+          line-height: 1.4;
+        ">
+          <strong>Importante:</strong>
+          no cierres esta pestaña todavía.
+          Espera a ver el mensaje de confirmación final.
+        </div>
+
+      </div>
+    `,
+
+    name: "HtmlComponent_1"
+  }],
+
+  response_components: [{
+    type: "ButtonResponseComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": -72
+    },
+
+    zIndex: 2,
+
+    choices: ["Guardar y finalizar"],
+
+    button_color: "#ffffff",
+    button_text_color: "#000000",
+
+    button_font_size: 28,
+
+    button_border_radius: 3,
+    button_border_color: "#000000",
+    button_border_width: 1,
+
+    button_padding: "10px 22px",
+
+    name: "ButtonResponseComponent_1",
+
+    _button_font_size_runtime_vw: 1.4583333333333333
+  }],
+
+  __canvasStyles: {
+    "backgroundColor": "#ffffff",
+    "width": 1920,
+    "height": 1080,
+    "fullScreen": true,
+    "progressBar": false
+  }
+}];
     const End_experiment_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
