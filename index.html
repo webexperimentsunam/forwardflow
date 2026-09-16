@@ -474,7 +474,7 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
       }
 
-      </style>
+    </style>
   <link href="https://unpkg.com/jspsych@8.2.2/css/jspsych.css" rel="stylesheet" type="text/css"><script src="https://unpkg.com/jspsych@8.2.2"></script><script src="https://unpkg.com/jspsych-expbuilder-plugin-dynamic@1.0.7/dist/index.iife.js"></script><link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@4.0.0/css/survey.css" data-dynamic-styles="true"><script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0" data-dynamic-plugins="true"></script><script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.1.0" data-dynamic-plugins="true"></script></head>
   <body>
     
@@ -1470,6 +1470,69 @@ const cWe = observeJumpReload;
     });
   }
 
+  function _showDeclined() {
+
+    _hideLoading();
+    _clearCompletedTrialVisuals();
+
+    const overlay = document.createElement('div');
+
+    overlay.id = 'jspsych-loading-overlay';
+
+    overlay.style.cssText = [
+      'position:fixed',
+      'inset:0',
+      'z-index:9999',
+      'display:flex',
+      'flex-direction:column',
+      'align-items:center',
+      'justify-content:center',
+      'background:' + _overlayBg,
+      'gap:18px',
+      'font-family:sans-serif',
+      'padding:30px',
+      'box-sizing:border-box'
+    ].join(';');
+
+    overlay.innerHTML = `
+
+      <div style="
+        font-size:42px;
+        font-weight:600;
+        text-align:center;
+        color:#111;
+      ">
+        Sesión finalizada
+      </div>
+
+      <div style="
+        max-width:700px;
+        font-size:24px;
+        line-height:1.45;
+        text-align:center;
+        color:#555;
+      ">
+        Has decidido no participar en el estudio.
+        No se enviaron tus respuestas.
+      </div>
+
+      <div style="
+        margin-top:8px;
+        font-size:22px;
+        text-align:center;
+        color:#555;
+      ">
+        Ya puedes cerrar esta pestaña.
+      </div>
+
+    `;
+
+    document.body.appendChild(overlay);
+  }
+
+
+
+  
   function _showSuccess() {
     _hideLoading();
     _clearCompletedTrialVisuals();
@@ -2039,6 +2102,55 @@ const cWe = observeJumpReload;
           );
           return;
         }
+
+        // ============================================================
+        // FINAL ESPECIAL: PARTICIPANTE NO DIO CONSENTIMIENTO
+        // ============================================================
+
+        if (window.participationDeclined === true) {
+
+          // Borrar cualquier trial acumulado localmente.
+          // No se envía a Google Drive.
+          try {
+            if (BATCH_CONFIG.useIndexedDB) {
+              await TrialDB.clear();
+            }
+          } catch (error) {
+            console.error(
+              'Error clearing declined-session local data:',
+              error
+            );
+          }
+
+          // Eliminar información usada para reanudar esta sesión.
+          window.ExpBuilderNavigation.clearTransientState();
+
+          localStorage.removeItem(
+            _publicStorageKeys.sessionId
+          );
+
+          localStorage.removeItem(
+            _publicStorageKeys.participant
+          );
+
+          localStorage.removeItem(
+            _publicStorageKeys.resumeTrial
+          );
+
+          sessionStorage.removeItem(
+            _publicStorageKeys.captchaPassed
+          );
+
+          // Mostrar un final específico.
+          _showDeclined();
+
+          // MUY IMPORTANTE:
+          // detener aquí el on_finish global.
+          // Así NO llega a sendCompleteExperiment().
+          return;
+        }
+
+
         _showLoading('Saving your data…');
         await new Promise(r => setTimeout(r, 0));
         
@@ -2125,7 +2237,7 @@ window.ExpBuilderExecutionAddresses = Object.freeze(
 );
 
 const timeline = [];
-
+window.participationDeclined = false;
 
   // ============================================================
   // FIX MÓVIL PARA INPUTS DE FORWARD FLOW Y CREATIVIDAD
@@ -3006,9 +3118,106 @@ data: {
   
 
 
-const test_stimuli_without_consent = [{components: [{ type: "TextComponent", coordinates: {"x":0,"y":0}, zIndex: 1, text: "El experimento finalizó porque no aceptó los términos de participación. \nPuede cerrar el navegador.", font_color: "#ff0000", font_size: 32, font_family: "monospace", font_weight: "bold", font_style: "normal", text_align: "center", line_height: 1.5, background_color: "transparent", padding: "0px", border_radius: 0, border_color: "transparent", border_width: 0, name: "TextComponent_1", _font_size_runtime_vw: 1.6666666666666667 }],
-response_components: [{ type: "ButtonResponseComponent", coordinates: {"x":0,"y":-28.944012202115033}, zIndex: 2, choices: ["Finalizar"], button_color: "#ef4444", button_text_color: "#ffffff", button_font_size: 23, button_border_radius: 3, button_border_color: "#ef4444", button_border_width: 2, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.1979166666666667 }],
-__canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
+const test_stimuli_without_consent = [{
+  components: [{
+    type: "HtmlComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": 8
+    },
+
+    zIndex: 1,
+
+    stimulus: `
+      <div style="
+        box-sizing: border-box;
+        width: 840px;
+        max-width: 840px;
+        margin: 0 auto;
+
+        font-family: sans-serif;
+        color: #000000;
+        text-align: center;
+      ">
+
+        <div style="
+          font-size: 42px;
+          font-weight: bold;
+          line-height: 1.2;
+          margin-bottom: 28px;
+        ">
+          Has decidido no participar
+        </div>
+
+
+        <p style="
+          margin: 0 0 26px 0;
+          font-size: 28px;
+          line-height: 1.45;
+        ">
+          Debido a que no aceptaste el consentimiento de participación,
+          el estudio <strong>no continuará</strong>.
+        </p>
+
+
+        <div style="
+          box-sizing: border-box;
+          padding: 20px 24px;
+
+          background: #f1f1f1;
+          border-radius: 12px;
+
+          font-size: 25px;
+          line-height: 1.4;
+        ">
+          No se te presentarán más preguntas ni tareas.<br>
+          Pulsa <strong>“Finalizar”</strong> para cerrar correctamente
+          esta sesión.
+        </div>
+
+      </div>
+    `,
+
+    name: "HtmlComponent_1"
+  }],
+
+  response_components: [{
+    type: "ButtonResponseComponent",
+
+    coordinates: {
+      "x": 0,
+      "y": -38
+    },
+
+    zIndex: 2,
+
+    choices: ["Finalizar"],
+
+    button_color: "#ffffff",
+    button_text_color: "#000000",
+
+    button_font_size: 28,
+
+    button_border_radius: 3,
+    button_border_color: "#000000",
+    button_border_width: 1,
+
+    button_padding: "10px 22px",
+
+    name: "ButtonResponseComponent_1",
+
+    _button_font_size_runtime_vw: 1.4583333333333333
+  }],
+
+  __canvasStyles: {
+    "backgroundColor": "#ffffff",
+    "width": 1920,
+    "height": 1080,
+    "fullScreen": true,
+    "progressBar": false
+  }
+}];
     const without_consent_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
@@ -3102,10 +3311,16 @@ data: {
     },
     
     on_finish: function(data) {
-      if (window.branchingActive) {
-        jsPsych.abortExperiment('', {});
-      }
-    },};
+
+    // La persona decidió NO participar.
+    // Esto hace que el final global descarte los datos
+    // en lugar de enviarlos al almacenamiento.
+    window.participationDeclined = true;
+
+    if (window.branchingActive) {
+      jsPsych.abortExperiment('', {});
+    }
+  },};
     const without_consent_procedure = {
     timeline: 
     [without_consent_timeline],
@@ -3456,7 +3671,7 @@ const test_stimuli_birthdate = [{
       text: "%%",
 
       check_answers: false,
-      allow_blanks: true,
+      allow_blanks: false,
 
       name: "InputResponseComponent_1",
 
@@ -4306,7 +4521,7 @@ data: {
         "height": 1.5625,
         "zIndex": 20,
         "check_answers": false,
-        "allow_blanks": true,
+        "allow_blanks": false,
         "name": "InputResponseComponent_1_copy_18",
         "text": "<div id=\"iy5z\" style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%</div>",
         "input_font_size": 20,
@@ -4382,7 +4597,7 @@ data: {
         "height": 1.5625,
         "zIndex": 20,
         "check_answers": false,
-        "allow_blanks": true,
+        "allow_blanks": false,
         "name": "InputResponseComponent_1_copy_18",
         "text": "<div id=\"iy5z\" style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%</div>",
         "input_font_size": 20,
@@ -4458,7 +4673,7 @@ data: {
         "height": 1.5625,
         "zIndex": 20,
         "check_answers": false,
-        "allow_blanks": true,
+        "allow_blanks": false,
         "name": "InputResponseComponent_1_copy_18",
         "text": "<div id=\"iy5z\" style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%</div>",
         "input_font_size": 20,
@@ -4534,7 +4749,7 @@ data: {
         "height": 1.5625,
         "zIndex": 20,
         "check_answers": false,
-        "allow_blanks": true,
+        "allow_blanks": false,
         "name": "InputResponseComponent_1_copy_18",
         "text": "<div id=\"iy5z\" style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%</div>",
         "input_font_size": 20,
@@ -4610,7 +4825,7 @@ data: {
         "height": 1.5625,
         "zIndex": 20,
         "check_answers": false,
-        "allow_blanks": true,
+        "allow_blanks": false,
         "name": "InputResponseComponent_1_copy_18",
         "text": "<div id=\"iy5z\" style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%<br style=\"box-sizing: border-box;\">%%</div>",
         "input_font_size": 20,
@@ -4708,6 +4923,7 @@ test_stimuli_loop_1789348375639.forEach(function(stimulus) {
     // Mantener la columna centrada
     inputComponent.coordinates.x = 0;
     inputComponent.coordinates.y = 13.133872641633134 + verticalOffset;
+    inputComponent.allow_blanks = false;
   }
 
 
@@ -4743,6 +4959,8 @@ test_stimuli_loop_1789348375639.forEach(function(stimulus) {
     const forward_flow_task_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components_forward_flow_task"),
 response_components: jsPsych.timelineVariable("response_components_forward_flow_task"),
+require_response: true,
+response_ends_trial: true,
 __canvasStyles: jsPsych.timelineVariable("__canvasStyles_forward_flow_task"),
 data: {
     rt: "rt_forward_flow_task",
@@ -6430,7 +6648,7 @@ timeline.push(loop_1789347025155_procedure);
 
 
 const test_stimuli_instructions_creativity_2 = [{components: [{ type: "TextComponent", coordinates: {"x":0,"y":56.45515251303625}, zIndex: 1, text: "Por favor, escribe algunas oraciones creativas o un breve párrafo para las siguientes imágenes. \nNo existen reglas ni expectativas específicas; \nsimplemente escribe aquello que consideres que describe o se ajusta de la manera más creativa a cada imagen.", font_color: "#000000", font_size: 23, font_family: "sans-serif", font_weight: "normal", font_style: "normal", text_align: "center", line_height: 1.5, background_color: "transparent", padding: "0px", border_radius: 0, border_color: "transparent", border_width: 0, name: "TextComponent_1", _font_size_runtime_vw: 1.1979166666666667 }, { type: "ImageComponent", coordinates: {"x":0,"y":9.806635641827159}, width: 47.3802013010254, height: 15.804878195618214, zIndex: 4, stimulus: "img/image_creativity2.png", name: "ImageComponent_1" }],
-response_components: [{ type: "InputResponseComponent", coordinates: {"x":0,"y":-43.51599276708275}, width: 36.380208333333336, height: 9.921875, zIndex: 2, text: "%%", check_answers: false, allow_blanks: true, name: "InputResponseComponent_1", input_font_size: 127, input_background_color: "#ffffff", input_border_color: "#000000", input_border_width: 2, _input_font_size_runtime_vw: 6.614583333333333 }, { type: "ButtonResponseComponent", coordinates: {"x":0,"y":-68.77785077730302}, zIndex: 3, choices: ["Continuar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
+response_components: [{ type: "InputResponseComponent", coordinates: {"x":0,"y":-43.51599276708275}, width: 36.380208333333336, height: 9.921875, zIndex: 2, text: "%%", check_answers: false, allow_blanks: false, name: "InputResponseComponent_1", input_font_size: 127, input_background_color: "#ffffff", input_border_color: "#000000", input_border_width: 2, _input_font_size_runtime_vw: 6.614583333333333 }, { type: "ButtonResponseComponent", coordinates: {"x":0,"y":-68.77785077730302}, zIndex: 3, choices: ["Continuar"], button_color: "#ffffff", button_text_color: "#000000", button_font_size: 20, button_border_radius: 3, button_border_color: "#000000", button_border_width: 1, button_padding: "6px 14px", name: "ButtonResponseComponent_1", _button_font_size_runtime_vw: 1.0416666666666665 }],
 __canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScreen":true,"progressBar":false}}];
 
 
@@ -6549,6 +6767,8 @@ let creativity2TextareaObserver = null;
 const instructions_creativity_2_timeline = {
     type: DynamicPlugin, components: jsPsych.timelineVariable("components"),
 response_components: jsPsych.timelineVariable("response_components"),
+require_response: true,
+response_ends_trial: true,
 __canvasStyles: jsPsych.timelineVariable("__canvasStyles"),
 data: {
     rt: "rt",
