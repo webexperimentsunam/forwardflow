@@ -1,5 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
+    <meta name="color-scheme" content="only light">
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover"
@@ -13,6 +14,26 @@
     
 
     <style>
+
+      :root {
+        color-scheme: only light;
+      }
+
+      html,
+      body,
+      .jspsych-display-element,
+      .jspsych-content-wrapper,
+      #jspsych-dynamic-plugin-container {
+        background-color: #ffffff !important;
+      }
+
+      input,
+      textarea,
+      select {
+        color-scheme: only light;
+      }
+
+
       html {
         -webkit-text-size-adjust: 100%;
         text-size-adjust: 100%;
@@ -2621,12 +2642,291 @@ window.participationDeclined = false;
 
   const globalPreload = {
     type: jsPsychPreload,
-    files: ["img/image_creativity2.png","img/logos.svg"]
+    images: ["img/image_creativity2.png","img/logos.svg"]
   };
+
+  // ============================================================
+  // COMPATIBILIDAD WEBKIT / SAFARI
+  // Forzar un segundo render del canvas de ExpBuilder
+  // después de que el canvas ya está visible.
+  // ============================================================
+
+  (function installWebKitDynamicCanvasRefreshFix() {
+
+    const ua = navigator.userAgent;
+
+
+    // ----------------------------------------------------------
+    // iPhone / iPad:
+    // todos los navegadores de iOS utilizan WebKit.
+    // ----------------------------------------------------------
+
+    const isIOS =
+      /iPad|iPhone|iPod/i.test(ua) ||
+      (
+        navigator.platform === 'MacIntel' &&
+        navigator.maxTouchPoints > 1
+      );
+
+
+    // ----------------------------------------------------------
+    // Safari de escritorio.
+    // Excluimos Chrome/Edge/Opera/etc.
+    // ----------------------------------------------------------
+
+    const isDesktopSafari =
+      /AppleWebKit/i.test(ua) &&
+      /Safari/i.test(ua) &&
+      !/Chrome|Chromium|CriOS|Edg|EdgiOS|OPR|FxiOS/i.test(ua);
+
+
+    const needsWebKitRefresh =
+      isIOS || isDesktopSafari;
+
+
+    if (!needsWebKitRefresh) {
+      return;
+    }
+
+
+    console.log(
+      'ExpBuilder: WebKit canvas refresh fix activado'
+    );
+
+
+    // Cada ensayo DynamicPlugin crea un canvas nuevo.
+    // WeakSet nos permite recordar cuáles ya corregimos.
+    const correctedCanvases =
+      new WeakSet();
+
+    const pendingCanvases =
+      new WeakSet();
+
+
+    function scheduleSecondRender(canvas) {
+
+      if (
+        !canvas ||
+        correctedCanvases.has(canvas) ||
+        pendingCanvases.has(canvas)
+      ) {
+        return;
+      }
+
+
+      pendingCanvases.add(canvas);
+
+      let attempts = 0;
+
+
+      function tryRender() {
+
+        // Dos frames:
+        //
+        // 1. permitir que ExpBuilder muestre su contenedor
+        // 2. volver a pintar cuando el canvas ya está visible
+
+        requestAnimationFrame(function() {
+
+          requestAnimationFrame(function() {
+
+            if (!canvas.isConnected) {
+              return;
+            }
+
+
+            const container =
+              canvas.closest(
+                '#jspsych-dynamic-plugin-container'
+              );
+
+
+            const stages =
+              container?.__dynamicCanvasStages;
+
+
+            if (
+              stages &&
+              typeof stages.values === 'function' &&
+              stages.size > 0
+            ) {
+
+              let rendered = false;
+
+
+              for (
+                const stage of stages.values()
+              ) {
+
+                if (
+                  stage &&
+                  typeof stage.render === 'function'
+                ) {
+
+                  stage.render();
+
+                  rendered = true;
+                }
+
+              }
+
+
+              if (rendered) {
+
+                correctedCanvases.add(canvas);
+
+                console.log(
+                  'ExpBuilder: segundo render WebKit aplicado'
+                );
+
+                return;
+              }
+
+            }
+
+
+            // En caso de que el stage todavía no esté listo,
+            // probar unos frames más.
+            attempts += 1;
+
+            if (attempts < 8) {
+              tryRender();
+            }
+
+          });
+
+        });
+
+      }
+
+
+      tryRender();
+    }
+
+
+    function inspectNode(node) {
+
+      if (!(node instanceof Element)) {
+        return;
+      }
+
+
+      if (
+        node.matches(
+          '#jspsych-dynamic-webgl-stage'
+        )
+      ) {
+
+        scheduleSecondRender(node);
+
+      }
+
+
+      const canvases =
+        node.querySelectorAll?.(
+          '#jspsych-dynamic-webgl-stage'
+        );
+
+
+      if (canvases) {
+
+        canvases.forEach(
+          scheduleSecondRender
+        );
+
+      }
+
+    }
+
+
+    // ----------------------------------------------------------
+    // Detectar cada nuevo canvas creado por DynamicPlugin
+    // ----------------------------------------------------------
+
+    const observer =
+      new MutationObserver(function(mutations) {
+
+        mutations.forEach(function(mutation) {
+
+          mutation.addedNodes.forEach(
+            inspectNode
+          );
+
+        });
+
+      });
+
+
+    observer.observe(
+      document.documentElement,
+      {
+        childList: true,
+        subtree: true
+      }
+    );
+
+
+    // Por si el canvas ya existiera.
+    inspectNode(document.documentElement);
+
+  })();
+
 
   timeline.push(globalPreload);
 
     
+function runSamsungVisualCheck() {
+
+  const userAgent =
+    navigator.userAgent || "";
+
+  const isSamsungInternet =
+    /SamsungBrowser\//i.test(userAgent);
+
+  if (!isSamsungInternet) {
+    return;
+  }
+
+
+  const canSeeCorrectly =
+    window.confirm(
+      "COMPROBACIÓN DE VISUALIZACIÓN\n\n" +
+      "¿Puedes ver claramente la pantalla de bienvenida?\n\n" +
+      "El fondo debe verse claro y todo el texto debe poder leerse sin dificultad.\n\n" +
+      "Pulsa ACEPTAR si se ve correctamente.\n" +
+      "Pulsa CANCELAR si el fondo se ve oscuro o el texto no se puede leer."
+    );
+
+
+  if (canSeeCorrectly) {
+
+    // Todo está bien.
+    // El participante continúa normalmente.
+    return;
+
+  }
+
+
+  // ----------------------------------------------------------
+  // NO SE VE CORRECTAMENTE
+  // ----------------------------------------------------------
+
+  window.alert(
+    "NAVEGADOR NO COMPATIBLE CON ESTA CONFIGURACIÓN\n\n" +
+    "Samsung Internet está modificando los colores del experimento " +
+    "y algunos elementos no pueden visualizarse correctamente.\n\n" +
+    "Para participar, abre este mismo enlace en Google Chrome " +
+    "o cambia temporalmente la configuración de visualización " +
+    "de Samsung a modo claro y vuelve a abrir el enlace."
+  );
+
+
+  // Evitar que continúe el experimento.
+  document.documentElement.innerHTML = "";
+
+}
+
+
 
 const test_stimuli_Bienvenida = [{components: [{ type: "ImageComponent", coordinates: {"x":0,"y":50}, width: 24, height: 12.8, zIndex: 1, stimulus: "img/logos.svg", name: "ImageComponent_1" }, { type: "HtmlComponent", coordinates: {"x":0,"y":-25.2126573655719}, zIndex: 2, 
 stimulus: `
@@ -2772,6 +3072,12 @@ data: {
       
     },
     
+    on_load: function() {
+
+      runSamsungVisualCheck();
+
+    },
+
     on_finish: function(data) {
       const branchDecision = window.ExpBuilderBranching.decide(
         data,
@@ -15095,9 +15401,7 @@ data: {
     };
     timeline.push(End_experiment_procedure);
   
-
     jsPsych.run(timeline);
-
 
 })();
 
