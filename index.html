@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
-    <meta name="color-scheme" content="only light">
+    <meta name="color-scheme" content="light dark">
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover"
@@ -16,7 +16,7 @@
     <style>
 
       :root {
-        color-scheme: only light;
+        color-scheme: light dark;
       }
 
       html,
@@ -24,13 +24,14 @@
       .jspsych-display-element,
       .jspsych-content-wrapper,
       #jspsych-dynamic-plugin-container {
-        background-color: #ffffff !important;
+        background-color: Canvas !important;
+        color: CanvasText !important;
       }
 
       input,
       textarea,
       select {
-        color-scheme: only light;
+        color-scheme: light dark;
       }
 
 
@@ -494,6 +495,211 @@
 
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
       }
+
+      /* =========================================================
+        MODO CLARO / OSCURO
+        ========================================================= */
+
+      :root {
+        color-scheme: light dark;
+      }
+
+
+      /* =========================================================
+        MODO OSCURO
+        IMPORTANTE:
+        No modificamos aquí el canvas de DynamicPlugin.
+        Sus colores se corregirán desde JavaScript antes de renderizar.
+        ========================================================= */
+
+      @media (prefers-color-scheme: dark) {
+
+        /* -------------------------------------------------------
+          PÁGINA GENERAL
+          ------------------------------------------------------- */
+
+        html,
+        body,
+        .jspsych-display-element,
+        .jspsych-content-wrapper {
+          background-color: #121212 !important;
+          color: #f2f2f2 !important;
+        }
+
+
+        /* -------------------------------------------------------
+          INPUTS HTML
+          ------------------------------------------------------- */
+
+        input,
+        textarea,
+        select {
+          background-color: #1e1e1e !important;
+          color: #f2f2f2 !important;
+          border-color: #aaaaaa !important;
+          color-scheme: dark !important;
+        }
+
+
+        /* =======================================================
+          SURVEYJS
+          ======================================================= */
+
+        #jspsych-survey-surveyjs-container,
+        #jspsych-survey-surveyjs-container .jspsych-survey-container,
+
+        #jspsych-survey-surveyjs-container .sd-root-modern,
+        #jspsych-survey-surveyjs-container .sv-root-modern,
+        #jspsych-survey-surveyjs-container .sd-root,
+        #jspsych-survey-surveyjs-container .sv_main,
+
+        #jspsych-survey-surveyjs-container .sd-container-modern,
+        #jspsych-survey-surveyjs-container .sv-container-modern,
+        #jspsych-survey-surveyjs-container .sd-body,
+        #jspsych-survey-surveyjs-container .sv_body,
+        #jspsych-survey-surveyjs-container .sd-page,
+        #jspsych-survey-surveyjs-container .sv_page,
+        #jspsych-survey-surveyjs-container .sd-row {
+
+          background: #121212 !important;
+          background-color: #121212 !important;
+
+          color: #f2f2f2 !important;
+        }
+
+
+        /* -------------------------------------------------------
+          TARJETAS DE PREGUNTAS
+          ------------------------------------------------------- */
+
+        #jspsych-survey-surveyjs-container .sd-question,
+        #jspsych-survey-surveyjs-container .sv_q {
+
+          background: #1e1e1e !important;
+          background-color: #1e1e1e !important;
+
+          color: #f2f2f2 !important;
+
+          border-color: #555555 !important;
+        }
+
+
+        /* -------------------------------------------------------
+          TEXTOS DEL SURVEY
+          ------------------------------------------------------- */
+
+        #jspsych-survey-surveyjs-container .sd-title,
+        #jspsych-survey-surveyjs-container .sd-question__title,
+        #jspsych-survey-surveyjs-container .sd-element__title,
+
+        #jspsych-survey-surveyjs-container .sd-title .sv-string-viewer,
+        #jspsych-survey-surveyjs-container .sd-question__title .sv-string-viewer,
+        #jspsych-survey-surveyjs-container .sd-element__title .sv-string-viewer,
+
+        #jspsych-survey-surveyjs-container .sd-selectbase__label,
+        #jspsych-survey-surveyjs-container .sd-item__control-label,
+
+        #jspsych-survey-surveyjs-container .sv-label,
+        #jspsych-survey-surveyjs-container .sv_q_radiogroup_label {
+
+          color: #f2f2f2 !important;
+        }
+
+
+        /* -------------------------------------------------------
+          RADIO BUTTONS
+          ------------------------------------------------------- */
+
+        #jspsych-survey-surveyjs-container .sd-radio__decorator {
+
+          background: #1e1e1e !important;
+
+          border-color: #aaaaaa !important;
+        }
+
+
+        #jspsych-survey-surveyjs-container
+        .sd-radio--checked
+        .sd-radio__decorator {
+
+          border-color: #f2f2f2 !important;
+        }
+
+
+        #jspsych-survey-surveyjs-container
+        .sd-radio--checked
+        .sd-radio__decorator::after {
+
+          background: #f2f2f2 !important;
+        }
+
+
+        /* -------------------------------------------------------
+          BOTÓN DEL SURVEY
+          ------------------------------------------------------- */
+
+        #jspsych-survey-surveyjs-container .sd-btn,
+        #jspsych-survey-surveyjs-container .sd-navigation__complete-btn,
+        #jspsych-survey-surveyjs-container .sv-btn {
+
+          background: #2b2b2b !important;
+
+          color: #f2f2f2 !important;
+
+          border-color: #aaaaaa !important;
+        }
+
+
+        /* -------------------------------------------------------
+          INDICADOR "MÁS PREGUNTAS"
+          ------------------------------------------------------- */
+
+        .survey-scroll-hint {
+
+          background: rgba(30, 30, 30, 0.96) !important;
+
+          color: #f2f2f2 !important;
+
+          border-color: #777777 !important;
+        }
+
+
+        /* -------------------------------------------------------
+          SCROLLBAR DEL SURVEY
+          ------------------------------------------------------- */
+
+        #jspsych-survey-surveyjs-container
+        .jspsych-survey-container {
+
+          scrollbar-color: #777777 #222222;
+        }
+
+
+        #jspsych-survey-surveyjs-container
+        .jspsych-survey-container::-webkit-scrollbar-track {
+
+          background: #222222 !important;
+
+          border-color: #444444 !important;
+        }
+
+
+        #jspsych-survey-surveyjs-container
+        .jspsych-survey-container::-webkit-scrollbar-thumb {
+
+          background: #777777 !important;
+
+          border-color: #222222 !important;
+        }
+
+
+        #jspsych-survey-surveyjs-container
+        .jspsych-survey-container::-webkit-scrollbar-thumb:hover {
+
+          background: #999999 !important;
+        }
+
+      }      
 
     </style>
   <link href="https://unpkg.com/jspsych@8.2.2/css/jspsych.css" rel="stylesheet" type="text/css"><script src="https://unpkg.com/jspsych@8.2.2"></script><script src="https://unpkg.com/jspsych-expbuilder-plugin-dynamic@1.0.7/dist/index.iife.js"></script><link rel="stylesheet" href="https://unpkg.com/@jspsych/plugin-survey@4.0.0/css/survey.css" data-dynamic-styles="true"><script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0" data-dynamic-plugins="true"></script><script src="https://unpkg.com/@jspsych/plugin-fullscreen@2.1.0" data-dynamic-plugins="true"></script></head>
@@ -1991,18 +2197,271 @@ const cWe = observeJumpReload;
     // Clean up stale jsPsych wrappers from previous runs (prevents stacking on restarts)
     document.querySelectorAll('.jspsych-content-wrapper').forEach(el => el.remove());
 
+    
+ 
+      function applyExpBuilderDarkTheme(trial) {
+
+        const darkMode =
+          window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        if (!darkMode || !trial) {
+          return;
+        }
+
+        const seen = new WeakSet();
+
+        function darkenHtml(html) {
+
+          if (typeof html !== 'string') {
+            return html;
+          }
+
+          return html
+
+            /* Texto negro */
+            .replace(
+              /color\s*:\s*#000000/gi,
+              'color: #f2f2f2'
+            )
+
+            /* Fondos claros */
+            .replace(
+              /background(?:-color)?\s*:\s*#ffffff/gi,
+              'background-color: #1e1e1e'
+            )
+            .replace(
+              /background(?:-color)?\s*:\s*#fafafa/gi,
+              'background-color: #1e1e1e'
+            )
+            .replace(
+              /background(?:-color)?\s*:\s*#f1f1f1/gi,
+              'background-color: #242424'
+            )
+
+            /* Bordes grises claros */
+            .replace(
+              /#dddddd/gi,
+              '#555555'
+            );
+        }
+
+
+        function walk(obj) {
+
+          if (!obj || typeof obj !== 'object') {
+            return;
+          }
+
+          if (seen.has(obj)) {
+            return;
+          }
+
+          seen.add(obj);
+
+
+          if (Array.isArray(obj)) {
+            obj.forEach(walk);
+            return;
+          }
+
+
+          /* =========================================
+            CANVAS DEL TRIAL
+            ========================================= */
+
+          if (
+            obj.__canvasStyles &&
+            obj.__canvasStyles.backgroundColor
+          ) {
+            obj.__canvasStyles.backgroundColor = '#121212';
+          }
+
+
+          /* =========================================
+            TEXTO DE EXPBUILDER
+            ========================================= */
+
+          if (obj.type === 'TextComponent') {
+
+            if (
+              typeof obj.font_color === 'string' &&
+              obj.font_color.toLowerCase() === '#000000'
+            ) {
+              obj.font_color = '#f2f2f2';
+            }
+
+            if (
+              typeof obj.background_color === 'string' &&
+              obj.background_color.toLowerCase() === '#ffffff'
+            ) {
+              obj.background_color = '#1e1e1e';
+            }
+
+            if (
+              typeof obj.border_color === 'string' &&
+              obj.border_color.toLowerCase() === '#000000'
+            ) {
+              obj.border_color = '#aaaaaa';
+            }
+          }
+
+
+          /* =========================================
+            HTML COMPONENT
+            ========================================= */
+
+          if (
+            obj.type === 'HtmlComponent' &&
+            typeof obj.stimulus === 'string'
+          ) {
+            obj.stimulus = darkenHtml(obj.stimulus);
+          }
+
+
+          /* =========================================
+            INPUTS
+            ========================================= */
+
+          if (obj.type === 'InputResponseComponent') {
+
+            obj.input_background_color = '#1e1e1e';
+            obj.input_border_color = '#aaaaaa';
+          }
+
+
+          /* =========================================
+            BOTONES
+            Sólo cambiamos los blancos/neutros.
+            Rojo, verde y azul permanecen iguales.
+            ========================================= */
+
+          if (obj.type === 'ButtonResponseComponent') {
+
+            if (
+              typeof obj.button_color === 'string' &&
+              obj.button_color.toLowerCase() === '#ffffff'
+            ) {
+              obj.button_color = '#2b2b2b';
+            }
+
+            if (
+              typeof obj.button_text_color === 'string' &&
+              obj.button_text_color.toLowerCase() === '#000000'
+            ) {
+              obj.button_text_color = '#f2f2f2';
+            }
+
+            if (
+              typeof obj.button_border_color === 'string' &&
+              obj.button_border_color.toLowerCase() === '#000000'
+            ) {
+              obj.button_border_color = '#aaaaaa';
+            }
+          }
+
+
+          /* Buscar componentes anidados */
+          Object.values(obj).forEach(function(value) {
+
+            if (value && typeof value === 'object') {
+              walk(value);
+            }
+
+          });
+        }
+
+
+        walk(trial);
+      }
+    
+
+
+      const expbuilderIsIOS =
+        /iPad|iPhone|iPod/i.test(navigator.userAgent) ||
+        (
+          navigator.platform === 'MacIntel' &&
+          navigator.maxTouchPoints > 1
+        );
+
+
+      function releaseExpBuilderWebGL() {
+
+        if (!expbuilderIsIOS) {
+          return;
+        }
+
+        const container =
+          document.getElementById(
+            'jspsych-dynamic-plugin-container'
+          );
+
+        if (!container) {
+          return;
+        }
+
+
+        const canvases =
+          container.querySelectorAll('canvas');
+
+
+        canvases.forEach(function(canvas) {
+
+          let gl = null;
+
+          try {
+            gl =
+              canvas.getContext('webgl2') ||
+              canvas.getContext('webgl') ||
+              canvas.getContext('experimental-webgl');
+          } catch (e) {
+            gl = null;
+          }
+
+
+          if (!gl) {
+            return;
+          }
+
+
+          try {
+
+            const loseContext =
+              gl.getExtension('WEBGL_lose_context');
+
+            if (loseContext) {
+              loseContext.loseContext();
+            }
+
+          } catch (e) {
+            // No hacer nada.
+          }
+
+        });
+      }
+
+
     // __INIT_JSPSYCH_START__
     const jsPsych = initJsPsych({
       
 
 
       on_trial_start: function(trial) {
-        const lastTrialData = jsPsych.data.get()
+
+        applyExpBuilderDarkTheme(trial);
+
+        const lastTrialData = jsPsych.data.get();
+
         if (lastTrialData && trial.data) {
-        trial.data.prev_response = lastTrialData.response;
+          trial.data.prev_response = lastTrialData.response;
         }
       },
 
+        on_trial_finish: function(data) {
+
+          releaseExpBuilderWebGL();
+
+        },
       
 
       on_data_update: async function (data) {
@@ -2620,8 +3079,44 @@ window.participationDeclined = false;
   });
 
 
-  // Si gira el teléfono, volver a comprobar
+    // Si gira el teléfono, volver a comprobar
+  let expbuilderLastWindowWidth =
+    window.innerWidth;
+
+
   window.addEventListener('resize', function() {
+
+    const currentWidth =
+      window.innerWidth;
+
+    const widthChanged =
+      Math.abs(
+        currentWidth -
+        expbuilderLastWindowWidth
+      ) > 20;
+
+
+    /*
+    * En iPhone, abrir/cerrar el teclado cambia sobre todo
+    * la ALTURA del viewport.
+    *
+    * No queremos recalcular toda la geometría de
+    * DynamicPlugin cada vez que aparece el teclado.
+    */
+    if (
+      expbuilderIsIOS &&
+      !widthChanged
+    ) {
+
+      updateSurveyScrollHint();
+
+      return;
+    }
+
+
+    expbuilderLastWindowWidth =
+      currentWidth;
+
 
     requestAnimationFrame(function() {
 
@@ -2875,58 +3370,6 @@ window.participationDeclined = false;
   timeline.push(globalPreload);
 
     
-function runSamsungVisualCheck() {
-
-  const userAgent =
-    navigator.userAgent || "";
-
-  const isSamsungInternet =
-    /SamsungBrowser\//i.test(userAgent);
-
-  if (!isSamsungInternet) {
-    return;
-  }
-
-
-  const canSeeCorrectly =
-    window.confirm(
-      "COMPROBACIÓN DE VISUALIZACIÓN\n\n" +
-      "¿Puedes ver claramente la pantalla de bienvenida?\n\n" +
-      "El fondo debe verse claro y todo el texto debe poder leerse sin dificultad.\n\n" +
-      "Pulsa ACEPTAR si se ve correctamente.\n" +
-      "Pulsa CANCELAR si el fondo se ve oscuro o el texto no se puede leer."
-    );
-
-
-  if (canSeeCorrectly) {
-
-    // Todo está bien.
-    // El participante continúa normalmente.
-    return;
-
-  }
-
-
-  // ----------------------------------------------------------
-  // NO SE VE CORRECTAMENTE
-  // ----------------------------------------------------------
-
-  window.alert(
-    "NAVEGADOR NO COMPATIBLE CON ESTA CONFIGURACIÓN\n\n" +
-    "Samsung Internet está modificando los colores del experimento " +
-    "y algunos elementos no pueden visualizarse correctamente.\n\n" +
-    "Para participar, abre este mismo enlace en Google Chrome " +
-    "o cambia temporalmente la configuración de visualización " +
-    "de Samsung a modo claro y vuelve a abrir el enlace."
-  );
-
-
-  // Evitar que continúe el experimento.
-  document.documentElement.innerHTML = "";
-
-}
-
-
 
 const test_stimuli_Bienvenida = [{components: [{ type: "ImageComponent", coordinates: {"x":0,"y":50}, width: 24, height: 12.8, zIndex: 1, stimulus: "img/logos.svg", name: "ImageComponent_1" }, { type: "HtmlComponent", coordinates: {"x":0,"y":-25.2126573655719}, zIndex: 2, 
 stimulus: `
@@ -3072,11 +3515,6 @@ data: {
       
     },
     
-    on_load: function() {
-
-      runSamsungVisualCheck();
-
-    },
 
     on_finish: function(data) {
       const branchDecision = window.ExpBuilderBranching.decide(
@@ -6968,30 +7406,80 @@ __canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScr
 
 
   // ----------------------------------------------------------
-  // 1. TEXTO DE INSTRUCCIONES
+  // 1. TÍTULO Y TEXTO DE INSTRUCCIONES
   // ----------------------------------------------------------
 
-  const instructions =
+  const title =
     stimulus.components.find(function(component) {
       return component.type === "TextComponent";
     });
 
-  if (instructions) {
+  if (title) {
 
-    // Dentro de nuestra zona útil de 900px
-    instructions.width = 42;
-    instructions.height = 15;
+    // Convertir el TextComponent original en el título
+    title.text = "SEGUNDA TAREA DE CREATIVIDAD";
 
-    instructions.coordinates.x = 0;
-    instructions.coordinates.y = 65;
+    title.width = 42;
+    title.height = 7;
 
-    instructions.font_size = 28;
-    instructions._font_size_runtime_vw =
-      1.4583333333333333;
+    title.coordinates.x = 0;
+    title.coordinates.y = 85;
 
-    instructions.line_height = 1.35;
-    instructions.text_align = "center";
+    title.font_size = 34;
+    title._font_size_runtime_vw =
+      1.875;
+
+    title.font_weight = "bold";
+    title.line_height = 1.2;
+    title.text_align = "center";
   }
+
+
+  // Crear un segundo componente para las instrucciones
+  stimulus.components.push({
+
+    type: "TextComponent",
+
+    coordinates: {
+      x: 0,
+      y: 60
+    },
+
+    zIndex: 5,
+
+    text:
+      "Esta actividad es diferente de la anterior.\n" +
+      "Ahora observarás varias imágenes y deberás escribir algunas oraciones creativas " +
+      "o un breve párrafo inspirado en ellas.\n\n" +
+      "No existen reglas ni expectativas específicas; simplemente escribe aquello " +
+      "que consideres que describe o se ajusta de la manera más creativa a las imágenes.",
+
+    font_color: "#000000",
+
+    font_size: 24,
+    _font_size_runtime_vw: 1.25,
+
+    font_family: "sans-serif",
+    font_weight: "normal",
+    font_style: "normal",
+
+    text_align: "center",
+    line_height: 1.35,
+
+    background_color: "transparent",
+
+    padding: "0px",
+
+    border_radius: 0,
+    border_color: "transparent",
+    border_width: 0,
+
+    width: 42,
+    height: 17,
+
+    name: "TextComponent_2"
+
+  });
 
 
   // ----------------------------------------------------------
@@ -7012,7 +7500,7 @@ __canvasStyles: {"backgroundColor":"#ffffff","width":1920,"height":1080,"fullScr
     image.height = 14;
 
     image.coordinates.x = 0;
-    image.coordinates.y = 20;
+    image.coordinates.y = 18;
   }
 
 
